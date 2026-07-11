@@ -1,0 +1,10 @@
+tile.short_shelf.name=Short Shelf
+tile.long_shelf.name=Shelf
+tile.display_shelf.name=Display Shelf
+
+tile.display_shelf.tooltip.one=Right-click an empty slot to insert an item
+tile.display_shelf.tooltip.two=Right-click with an empty hand or the same item to extract one
+tile.display_shelf.tooltip.three=Shift-right-click with an empty hand to extract all
+tile.shelf.tooltip=Used to hold up blocks
+
+itemGroup.woodworks=Woodworks

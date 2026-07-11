@@ -1,0 +1,37 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "woodworks:blocks/shelf_bracket",
+		"particle": "blocks/planks_oak"
+	},
+	"elements": [
+		{
+			"from": [13, 12, 0],
+			"to": [15, 14, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, 12, 0]},
+			"faces": {
+				"north": {"uv": [0, 4, 2, 6], "texture": "#1"},
+				"east": {"uv": [0, 0, 2, 6], "rotation": 90, "texture": "#1"},
+				"south": {"uv": [0, 2, 2, 4], "texture": "#1"},
+				"west": {"uv": [0, 0, 2, 6], "rotation": 270, "texture": "#1"},
+				"up": {"uv": [2, 6, 0, 0], "texture": "#1"},
+				"down": {"uv": [2, 0, 0, 6], "texture": "#1"}
+			}
+		},
+		{
+			"from": [13, 8, 0],
+			"to": [15, 12, 2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 2, 2, 6], "texture": "#1"},
+				"east": {"uv": [0, 0, 2, 4], "texture": "#1"},
+				"south": {"uv": [0, 2, 2, 6], "texture": "#1"},
+				"west": {"uv": [0, 0, 2, 4], "texture": "#1"},
+				"up": {"uv": [2, 2, 0, 0], "texture": "#1"},
+				"down": {"uv": [2, 2, 0, 4], "texture": "#1"}
+			}
+		}
+	],
+	"display": {}
+}

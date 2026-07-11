@@ -1,0 +1,22 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "woodworks:blocks/shelf_bracket",
+		"particle": "blocks/planks_oak"
+	},
+	"elements": [
+		{
+			"from": [1, 2, 0],
+			"to": [3, 6, 2],
+			"faces": {
+				"north": {"uv": [0, 0, 2, 4], "texture": "#1"},
+				"east": {"uv": [0, 1, 2, 5], "texture": "#1"},
+				"south": {"uv": [0, 4, 2, 8], "texture": "#1"},
+				"west": {"uv": [0, 8, 2, 12], "texture": "#1"},
+				"up": {"uv": [0, 8, 2, 10], "texture": "#1"},
+				"down": {"uv": [0, 5, 2, 7], "texture": "#1"}
+			}
+		}
+	]
+}
