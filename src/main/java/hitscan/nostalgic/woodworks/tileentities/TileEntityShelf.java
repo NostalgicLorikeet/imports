@@ -190,7 +190,7 @@ public class TileEntityShelf extends TileEntity {
     @Override
     @SideOnly(Side.CLIENT)
     public double getMaxRenderDistanceSquared() {
-        double maxBlocks = Minecraft.getMinecraft().gameSettings.renderDistanceChunks * 3.0;
+        double maxBlocks = Minecraft.getMinecraft().gameSettings.renderDistanceChunks * 1.5;
         return maxBlocks * maxBlocks;
     }
 }

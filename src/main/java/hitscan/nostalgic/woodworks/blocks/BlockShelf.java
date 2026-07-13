@@ -1,9 +1,11 @@
 package hitscan.nostalgic.woodworks.blocks;
 
 import hitscan.nostalgic.woodworks.properties.UnlistedPropertyString;
+import hitscan.nostalgic.woodworks.registry.WoodworksBlocks;
 import hitscan.nostalgic.woodworks.tileentities.TileEntityShelf;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -14,15 +16,17 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
@@ -65,6 +69,7 @@ public class BlockShelf extends BlockHorizontal {
         this.setTranslationKey(name);
         this.setHarvestLevel("axe", 0);
         this.setHardness(2.0F);
+        this.setSoundType(SoundType.WOOD);
         this.setDefaultState(this.getBlockState().getBaseState()
                 .withProperty(FACING, EnumFacing.NORTH)
                 .withProperty(LEFT, true)
@@ -123,6 +128,14 @@ public class BlockShelf extends BlockHorizontal {
                                 if (!player.getHeldItemMainhand().isEmpty() && shelf.stacks[targetStackSlot].isEmpty()) {
                                     shelf.stacks[targetStackSlot] = player.getHeldItemMainhand();
                                     player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+                                    world.playSound(
+                                            null,
+                                            pos.getX(), pos.getY(), pos.getZ(),
+                                            SoundEvents.ENTITY_ITEMFRAME_PLACE,
+                                            SoundCategory.PLAYERS,
+                                            1.0F,
+                                            0.5F
+                                    );
                                 } else if (!shelf.stacks[targetStackSlot].isEmpty()) {
                                     if (player.getHeldItemMainhand().isEmpty()) {
                                         ItemStack shelfStackCopy = shelf.stacks[targetStackSlot].copy();
@@ -137,12 +150,28 @@ public class BlockShelf extends BlockHorizontal {
                                             }
                                         }
                                     }
+                                    world.playSound(
+                                            null,
+                                            pos.getX(), pos.getY(), pos.getZ(),
+                                            SoundEvents.ENTITY_ITEM_PICKUP,
+                                            SoundCategory.PLAYERS,
+                                            1.0F,
+                                            0.75F
+                                    );
                                 }
                                 shelf.markDirtyAndNotify();
                             } else if (player.getHeldItemMainhand().isEmpty()) {
                                 player.setHeldItem(EnumHand.MAIN_HAND, shelf.stacks[targetStackSlot]);
                                 shelf.stacks[targetStackSlot] = ItemStack.EMPTY;
                                 shelf.markDirtyAndNotify();
+                                world.playSound(
+                                        null,
+                                        pos.getX(), pos.getY(), pos.getZ(),
+                                        SoundEvents.ENTITY_ITEM_PICKUP,
+                                        SoundCategory.PLAYERS,
+                                        1.0F,
+                                        0.75F
+                                );
                             }
                         }
                     }
@@ -437,5 +466,11 @@ public class BlockShelf extends BlockHorizontal {
             }
         }
         return stack;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return this == WoodworksBlocks.SHELF_DISPLAY_CHAINED ? BlockRenderLayer.CUTOUT : super.getRenderLayer();
     }
 }

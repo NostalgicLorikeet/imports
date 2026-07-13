@@ -12,7 +12,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
@@ -89,12 +88,12 @@ public class ItemShelf extends ItemBlock {
                 tooltip.add(type);
             }
 
-            if (stack.getItem() == WoodworksItems.SHELF_DISPLAY) {
+            if (stack.getItem() == WoodworksItems.SHELF_DISPLAY || stack.getItem() == WoodworksItems.SHELF_DISPLAY_CHAIN) {
                 tooltip.add(new TextComponentTranslation("tile.display_shelf.tooltip.one").getFormattedText());
                 tooltip.add(new TextComponentTranslation("tile.display_shelf.tooltip.two").getFormattedText());
                 tooltip.add(new TextComponentTranslation("tile.display_shelf.tooltip.three").getFormattedText());
             } else {
-                tooltip.add(new TextComponentTranslation("tile.shelf.tooltip.one").getFormattedText());
+                tooltip.add(new TextComponentTranslation("tile.shelf.tooltip").getFormattedText());
             }
         }
     }

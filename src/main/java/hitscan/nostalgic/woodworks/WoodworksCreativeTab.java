@@ -9,11 +9,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class WoodworksCreativeTab extends CreativeTabs {
     public WoodworksCreativeTab() {
         super(Tags.MOD_ID);
+        this.setBackgroundImageName("item_search.png");
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public ItemStack createIcon() {
         return new ItemStack(WoodworksBlocks.SHELF_LONG);
+    }
+
+    @Override
+    public boolean hasSearchBar() {
+        return true;
     }
 }

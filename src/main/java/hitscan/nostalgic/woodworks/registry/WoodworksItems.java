@@ -17,12 +17,14 @@ public class WoodworksItems {
     public static final Item SHELF_SHORT = new ItemShelf(WoodworksBlocks.SHELF_SHORT).setRegistryName("short_shelf").setTranslationKey("short_shelf");
     public static final Item SHELF_LONG = new ItemShelf(WoodworksBlocks.SHELF_LONG).setRegistryName("long_shelf").setTranslationKey("long_shelf");
     public static final Item SHELF_DISPLAY = new ItemShelf(WoodworksBlocks.SHELF_DISPLAY).setRegistryName("display_shelf").setTranslationKey("display_shelf");
+    public static final Item SHELF_DISPLAY_CHAIN = new ItemShelf(WoodworksBlocks.SHELF_DISPLAY_CHAINED).setRegistryName("chained_display_shelf").setTranslationKey("chained_display_shelf");
 
     @SubscribeEvent
     public static void blocks(RegistryEvent.Register<Item> event) {
         items.add(SHELF_SHORT);
         items.add(SHELF_LONG);
         items.add(SHELF_DISPLAY);
+        items.add(SHELF_DISPLAY_CHAIN);
 
         for (Item item : items) {
             item.setCreativeTab(Woodworks.CREATIVE_TAB);

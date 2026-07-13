@@ -44,15 +44,27 @@ public class WoodworksBlocks {
             new AxisAlignedBB(0,3/8D,0,1,0.5D, 3/8D),
             new AxisAlignedBB(0,1/8D,0,1,0.5D, 3/8D)
     );
+    public static final BlockShelf SHELF_DISPLAY_CHAINED = new BlockShelf(
+            "chained_display_shelf",
+            Material.WOOD,
+            false,
+            true,
+            false,
+            new AxisAlignedBB(0,3/8D,0,1,0.5D, 0.5D),
+            new AxisAlignedBB(0,4/8D,0,1,3/8D, 0.5D)
+    );
 
     @SubscribeEvent
     public static void blocks(RegistryEvent.Register<Block> event) {
         BLOCKS.add(SHELF_SHORT);
         BLOCKS.add(SHELF_LONG);
         BLOCKS.add(SHELF_DISPLAY);
+        BLOCKS.add(SHELF_DISPLAY_CHAINED);
+
         SHELVES.add(SHELF_SHORT);
         SHELVES.add(SHELF_LONG);
         SHELVES.add(SHELF_DISPLAY);
+        SHELVES.add(SHELF_DISPLAY_CHAINED);
 
         for (Block block : BLOCKS) {
             block.setCreativeTab(Woodworks.CREATIVE_TAB);
