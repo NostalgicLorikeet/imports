@@ -52,14 +52,16 @@ public class ItemShelf extends ItemBlock {
             }
 
             for (ItemStack woodStack : stacks) {
-                ItemStack stack = new ItemStack(this.getBlock());
-                NBTTagCompound tag = new NBTTagCompound();
-                NBTTagCompound texture = new NBTTagCompound();
-                texture.setString("id", woodStack.getItem().getRegistryName().toString());
-                texture.setInteger("Damage", woodStack.getItemDamage());
-                tag.setTag("Texture", texture);
-                stack.setTagCompound(tag);
-                items.add(stack);
+                if (woodStack.getItem() instanceof ItemBlock) {
+                    ItemStack stack = new ItemStack(this.getBlock());
+                    NBTTagCompound tag = new NBTTagCompound();
+                    NBTTagCompound texture = new NBTTagCompound();
+                    texture.setString("id", woodStack.getItem().getRegistryName().toString());
+                    texture.setInteger("Damage", woodStack.getItemDamage());
+                    tag.setTag("Texture", texture);
+                    stack.setTagCompound(tag);
+                    items.add(stack);
+                }
             }
         }
     }
@@ -88,7 +90,11 @@ public class ItemShelf extends ItemBlock {
                 tooltip.add(type);
             }
 
-            if (stack.getItem() == WoodworksItems.SHELF_DISPLAY || stack.getItem() == WoodworksItems.SHELF_DISPLAY_CHAIN) {
+            if (stack.getItem() == WoodworksItems.SHELF_DISPLAY
+                    || stack.getItem() == WoodworksItems.SHELF_DISPLAY_CHAIN
+                    || stack.getItem() == WoodworksItems.SHELF_DISPLAY_HANGING
+                )
+            {
                 tooltip.add(new TextComponentTranslation("tile.display_shelf.tooltip.one").getFormattedText());
                 tooltip.add(new TextComponentTranslation("tile.display_shelf.tooltip.two").getFormattedText());
                 tooltip.add(new TextComponentTranslation("tile.display_shelf.tooltip.three").getFormattedText());

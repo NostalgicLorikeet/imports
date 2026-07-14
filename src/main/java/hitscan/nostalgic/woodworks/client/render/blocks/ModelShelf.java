@@ -23,7 +23,6 @@ import java.util.List;
 
 public class ModelShelf implements IBakedModel {
     public static final TextureAtlasSprite oakPlankSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("minecraft:blocks/planks_oak");
-    TextureAtlasSprite newSprite = oakPlankSprite;
     IBakedModel shelfModel;
     String id = "minecraft:planks";
     int damage = 0;
@@ -43,6 +42,8 @@ public class ModelShelf implements IBakedModel {
     @Override
     public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
         List<BakedQuad> quads = new ArrayList<>();
+
+        TextureAtlasSprite newSprite = oakPlankSprite;
 
         try {
             if (!isItemStack) {
@@ -93,7 +94,7 @@ public class ModelShelf implements IBakedModel {
 
     @Override
     public TextureAtlasSprite getParticleTexture() {
-        return newSprite;
+        return oakPlankSprite;
     }
 
     @Override

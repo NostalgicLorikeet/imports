@@ -49,6 +49,7 @@ public class BlockShelf extends BlockHorizontal {
     public final boolean canPlaceBlocksOnTop;
     public final boolean canPlaceItemStacksIn;
     public final boolean canPlaceOnSlabs;
+    public final boolean hanging;
 
     public final AxisAlignedBB COLLISION_NORTH_AABB;
     public final AxisAlignedBB COLLISION_SOUTH_AABB;
@@ -60,11 +61,12 @@ public class BlockShelf extends BlockHorizontal {
     public final AxisAlignedBB BOUNDING_EAST_AABB;
     public final AxisAlignedBB BOUNDING_WEST_AABB;
 
-    public BlockShelf(String name, Material material, boolean canPlaceBlocksOnTop, boolean canPlaceItemStacksIn, boolean canPlaceOnSlabs, AxisAlignedBB collisionNorth, AxisAlignedBB boundingNorth) {
+    public BlockShelf(String name, Material material, boolean canPlaceBlocksOnTop, boolean canPlaceItemStacksIn, boolean canPlaceOnSlabs, boolean hanging, AxisAlignedBB collisionNorth, AxisAlignedBB boundingNorth) {
         super(material);
         this.canPlaceBlocksOnTop = canPlaceBlocksOnTop;
         this.canPlaceItemStacksIn = canPlaceItemStacksIn;
         this.canPlaceOnSlabs = canPlaceOnSlabs;
+        this.hanging = hanging;
         this.setRegistryName(name);
         this.setTranslationKey(name);
         this.setHarvestLevel("axe", 0);
@@ -142,6 +144,14 @@ public class BlockShelf extends BlockHorizontal {
                                         shelfStackCopy.setCount(1);
                                         player.setHeldItem(EnumHand.MAIN_HAND, shelfStackCopy);
                                         shelf.stacks[targetStackSlot].shrink(1);
+                                        world.playSound(
+                                                null,
+                                                pos.getX(), pos.getY(), pos.getZ(),
+                                                SoundEvents.ENTITY_ITEM_PICKUP,
+                                                SoundCategory.PLAYERS,
+                                                1.0F,
+                                                0.75F
+                                        );
                                     } else if (player.getHeldItemMainhand().isItemEqual(shelf.stacks[targetStackSlot]) && ItemStack.areItemStackTagsEqual(shelf.stacks[targetStackSlot], player.getHeldItemMainhand())) {
                                         if (player.getHeldItemMainhand().getCount() < player.getHeldItemMainhand().getMaxStackSize()) {
                                             if (!shelf.stacks[targetStackSlot].isEmpty()) {
@@ -149,7 +159,22 @@ public class BlockShelf extends BlockHorizontal {
                                                 shelf.stacks[targetStackSlot].shrink(1);
                                             }
                                         }
+                                        world.playSound(
+                                                null,
+                                                pos.getX(), pos.getY(), pos.getZ(),
+                                                SoundEvents.ENTITY_ITEM_PICKUP,
+                                                SoundCategory.PLAYERS,
+                                                1.0F,
+                                                0.75F
+                                        );
                                     }
+                                }
+                                shelf.markDirtyAndNotify();
+                            } else if (player.getHeldItemMainhand().isEmpty()) {
+                                if (!shelf.stacks[targetStackSlot].isEmpty()) {
+                                    player.setHeldItem(EnumHand.MAIN_HAND, shelf.stacks[targetStackSlot]);
+                                    shelf.stacks[targetStackSlot] = ItemStack.EMPTY;
+                                    shelf.markDirtyAndNotify();
                                     world.playSound(
                                             null,
                                             pos.getX(), pos.getY(), pos.getZ(),
@@ -159,19 +184,6 @@ public class BlockShelf extends BlockHorizontal {
                                             0.75F
                                     );
                                 }
-                                shelf.markDirtyAndNotify();
-                            } else if (player.getHeldItemMainhand().isEmpty()) {
-                                player.setHeldItem(EnumHand.MAIN_HAND, shelf.stacks[targetStackSlot]);
-                                shelf.stacks[targetStackSlot] = ItemStack.EMPTY;
-                                shelf.markDirtyAndNotify();
-                                world.playSound(
-                                        null,
-                                        pos.getX(), pos.getY(), pos.getZ(),
-                                        SoundEvents.ENTITY_ITEM_PICKUP,
-                                        SoundCategory.PLAYERS,
-                                        1.0F,
-                                        0.75F
-                                );
                             }
                         }
                     }
@@ -216,7 +228,10 @@ public class BlockShelf extends BlockHorizontal {
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityShelf();
+        TileEntityShelf shelf = new TileEntityShelf();
+        shelf.centerItems = this == WoodworksBlocks.SHELF_DISPLAY_HANGING || this == WoodworksBlocks.SHELF_DISPLAY_CHAINED;
+        shelf.centerZOnly = this == WoodworksBlocks.SHELF_DISPLAY_CHAINED;
+        return shelf;
     }
 
     @Override
@@ -247,40 +262,49 @@ public class BlockShelf extends BlockHorizontal {
 
     @Override
     public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side) {
-        BlockPos attachedPos = pos.offset(side.getOpposite());
-
-        if (world.getBlockState(attachedPos).getBlock() instanceof BlockShelf) {
-            for (EnumFacing horizontal : EnumFacing.HORIZONTALS) {
-                if (horizontal == side.getOpposite()) {
-                    continue;
+        if (hanging) {
+            if (side == EnumFacing.UP) {
+                return world.isSideSolid(pos,EnumFacing.DOWN);
+            } else {
+                if (world.isSideSolid(pos.up(), EnumFacing.DOWN)) {
+                    return true;
                 }
+            }
+        } else {
+            BlockPos attachedPos = pos.offset(side.getOpposite());
+
+            if (world.getBlockState(attachedPos).getBlock() instanceof BlockShelf) {
+                for (EnumFacing horizontal : EnumFacing.HORIZONTALS) {
+                    if (horizontal == side.getOpposite()) {
+                        continue;
+                    }
+                    if (world.isSideSolid(pos.offset(horizontal.getOpposite()), horizontal)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            if (canPlaceOnSlabs) {
+                if (world.getBlockState(attachedPos).getBlock() instanceof BlockSlab) {
+                    BlockSlab slab = (BlockSlab) world.getBlockState(attachedPos).getBlock();
+
+                    if (!slab.isDouble()) {
+                        return world.getBlockState(attachedPos).getValue(BlockSlab.HALF) == BlockSlab.EnumBlockHalf.TOP;
+                    }
+                }
+            }
+
+            if (side.getHorizontalIndex() != -1) {
+                return world.isSideSolid(attachedPos, side);
+            }
+
+            for (EnumFacing horizontal : EnumFacing.HORIZONTALS) {
                 if (world.isSideSolid(pos.offset(horizontal.getOpposite()), horizontal)) {
                     return true;
                 }
             }
-            return false;
         }
-
-        if (canPlaceOnSlabs) {
-            if (world.getBlockState(attachedPos).getBlock() instanceof BlockSlab) {
-                BlockSlab slab = (BlockSlab) world.getBlockState(attachedPos).getBlock();
-
-                if (!slab.isDouble()) {
-                    return world.getBlockState(attachedPos).getValue(BlockSlab.HALF) == BlockSlab.EnumBlockHalf.TOP;
-                }
-            }
-        }
-
-        if (side.getHorizontalIndex() != -1) {
-            return world.isSideSolid(attachedPos, side);
-        }
-
-        for (EnumFacing horizontal : EnumFacing.HORIZONTALS) {
-            if (world.isSideSolid(pos.offset(horizontal.getOpposite()), horizontal)) {
-                return true;
-            }
-        }
-
         return false;
     }
 
@@ -305,7 +329,7 @@ public class BlockShelf extends BlockHorizontal {
             }
         }
 
-        return this.getDefaultState().withProperty(FACING, facing.getOpposite());
+        return this.getDefaultState().withProperty(FACING, hanging ? placer.getHorizontalFacing() : facing.getOpposite());
     }
 
     @Override
@@ -471,6 +495,6 @@ public class BlockShelf extends BlockHorizontal {
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
-        return this == WoodworksBlocks.SHELF_DISPLAY_CHAINED ? BlockRenderLayer.CUTOUT : super.getRenderLayer();
+        return this == WoodworksBlocks.SHELF_DISPLAY_CHAINED || this == WoodworksBlocks.SHELF_DISPLAY_HANGING ? BlockRenderLayer.CUTOUT : super.getRenderLayer();
     }
 }

@@ -30,19 +30,28 @@ public class TileEntitySpecialRendererShelf extends TileEntitySpecialRenderer<Ti
                 if (stack.isEmpty()) continue;
                 boolean isBlock = RENDER_ITEM.getItemModelWithOverrides(stack, shelf.getWorld(), null).isGui3d();
                 int maxIconCount = 16; //this is actually how many items each icon represents butim too lazy to change the variable name
+                boolean centerItems = shelf.centerItems;
                 float iconSpace = isBlock ? 0.08F : 0.04F;
 
                 int iconCount = (stack.getCount() + maxIconCount - 1) / maxIconCount;
                 for (int a = (drawAllStacks ? 0 : Math.max(iconCount, 1) - 1); a < iconCount; a++) {
                     GlStateManager.pushMatrix();
 
-                    float xTranslate = facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH ? i / 3.0F + 1F / 6F : (a + 1) * iconSpace;
-                    float zTranslate = facing == EnumFacing.EAST || facing == EnumFacing.WEST ? i / 3.0F + 1F / 6F : (a + 1) * iconSpace;
+                    float zCentering = ((a + 1) * iconSpace) + (centerItems && !shelf.centerZOnly ? 0.45F : 0);
+                    float xCentering = i / 3.0F + 1F / 6F;
+
+                    if (centerItems) {
+                        if (i == 0) xCentering += 0.08F;
+                        if (i == 2) xCentering -= 0.08F;
+                    }
+
+                    float xTranslate = facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH ? xCentering : zCentering;
+                    float zTranslate = facing == EnumFacing.EAST || facing == EnumFacing.WEST ? xCentering : zCentering;
                     if (facing == EnumFacing.SOUTH) zTranslate = 1 - zTranslate;
                     if (facing == EnumFacing.EAST) xTranslate = 1 - xTranslate;
 
                     GlStateManager.translate(xTranslate, isBlock ? 0.45F - (a * 0.001F) : 0.575F, zTranslate);
-                    GlStateManager.scale(0.85F, 0.85F, 0.85F);
+                    GlStateManager.scale(0.85F, 0.85F + (centerItems && i == 1 ? 0.01F : 0), 0.85F);
                     GlStateManager.rotate(facing.getHorizontalAngle(), 0, 1.0F, 0);
                     //float angleShift = (float) MathHelper.clamp(((double) MathHelper.getPositionRandom(new Vec3i(shelf.getPos().getX(), shelf.getPos().getY() + i, shelf.getPos().getZ())) / Long.MAX_VALUE), -1.0, 1.0);
                     float angle = isBlock ? 45F : facing == EnumFacing.NORTH || facing == EnumFacing.EAST ? 11.25F : 168.75F;

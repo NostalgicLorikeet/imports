@@ -27,6 +27,8 @@ public class TileEntityShelf extends TileEntity {
     public ItemStack[] stacks;
     //setting it here too because its prolly cheaper than to constantly check the blockstate in the tesr
     public EnumFacing rotation;
+    public boolean centerItems = false;
+    public boolean centerZOnly = true;
 
     public TileEntityShelf() {}
 

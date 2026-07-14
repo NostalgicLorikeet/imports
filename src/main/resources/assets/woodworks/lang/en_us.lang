@@ -2,6 +2,9 @@ tile.short_shelf.name=Short Shelf
 tile.long_shelf.name=Shelf
 tile.display_shelf.name=Display Shelf
 tile.chained_display_shelf.name=Chained Display Shelf
+tile.hanging_display_shelf.name=Hanging Display Shelf
+tile.podium.name=Podium
+tile.podium_trophy.name=Trophy Podium
 
 tile.display_shelf.tooltip.one=Right-click an empty slot to insert an item
 tile.display_shelf.tooltip.two=Right-click with an empty hand or the same item to extract one

@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "type=0": { "model": "woodworks:podium" },
+        "type=1": { "model": "woodworks:podium_bottom" },
+        "type=2": { "model": "woodworks:podium_middle" },
+        "type=3": { "model": "woodworks:podium_top" }
+    }
+}
