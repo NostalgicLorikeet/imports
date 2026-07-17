@@ -38,7 +38,8 @@ public class BlockPodium extends Block {
     public static final IUnlistedProperty<String> ID_STONE = new UnlistedPropertyString("id");
     public static final IUnlistedProperty<Integer> DAMAGE_STONE = Properties.toUnlisted(PropertyInteger.create("damage", 0, 32766));
 
-    public static final AxisAlignedBB BOUNDING_TOP = new AxisAlignedBB(1/4D, 0, 1/4D, 3/4D, 5/8D, 3/4D);
+    public static final AxisAlignedBB BOUNDING_TOP = new AxisAlignedBB(1/4D, 0, 1/4D, 3/4D, 1/2D, 3/4D);
+    public static final AxisAlignedBB BOUNDING_LONE = new AxisAlignedBB(1/4D, 0, 1/4D, 3/4D, 7/8D, 3/4D);
     public static final AxisAlignedBB BOUNDING_MIDDLE = new AxisAlignedBB(5/16D, 0, 5/16D, 11/16D, 1D, 11/16D);
     public static final AxisAlignedBB BOUNDING_BOTTOM = new AxisAlignedBB(1/4D, 0, 1/4D, 3/4D, 1, 3/4D);
 
@@ -72,7 +73,7 @@ public class BlockPodium extends Block {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if ((facing == EnumFacing.UP || hitY > 0.4375) && (state.getActualState(world, pos).getValue(TYPE) == 0 || state.getActualState(world, pos).getValue(TYPE) == 3)) {
+        if ((facing == EnumFacing.UP || hitY > (11/16F)) && (state.getActualState(world, pos).getValue(TYPE) == 0 || state.getActualState(world, pos).getValue(TYPE) == 3)) {
             TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileEntityPodium) {
                 TileEntityPodium podium = (TileEntityPodium) te;
@@ -162,7 +163,7 @@ public class BlockPodium extends Block {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        if (state.getActualState(source, pos).getValue(TYPE) == 0 || state.getActualState(source, pos).getValue(TYPE) == 3) return BOUNDING_TOP;
+        if (state.getActualState(source, pos).getValue(TYPE) == 0 || state.getActualState(source, pos).getValue(TYPE) == 3) return BOUNDING_LONE;
         if (state.getActualState(source, pos).getValue(TYPE) == 1) return BOUNDING_BOTTOM;
         if (state.getActualState(source, pos).getValue(TYPE) == 2) return BOUNDING_MIDDLE;
         return BOUNDING_TOP;

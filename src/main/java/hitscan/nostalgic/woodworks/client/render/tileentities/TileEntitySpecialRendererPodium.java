@@ -4,6 +4,7 @@ import hitscan.nostalgic.woodworks.tileentities.TileEntityPodium;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.math.MathHelper;
@@ -23,7 +24,7 @@ public class TileEntitySpecialRendererPodium  extends TileEntitySpecialRenderer<
             if (!podium.single) {
                 for (int i = 0; i < (!isBlock ? (podium.stack.getCount() + 15)/16 : 1); i++) {
                     GlStateManager.pushMatrix();
-                    GlStateManager.translate(0.5, !isBlock ? 0.64F + (1/32F * i) : 0.75, 0.5);
+                    GlStateManager.translate(0.5, !isBlock ? 0.89F + (1/32F * i) : 1, 0.5);
                     double scale = isBlock ? 0.25 : 0.5;
                     GlStateManager.scale(scale, scale, scale);
                     if (!isBlock) GlStateManager.rotate(90, 1.0F, 0, 0);
@@ -38,10 +39,11 @@ public class TileEntitySpecialRendererPodium  extends TileEntitySpecialRenderer<
                 }
             } else {
                 GlStateManager.pushMatrix();
-                GlStateManager.translate(0.5, (isBlock ? 14/16F : 15/16F) + MathHelper.sin((Minecraft.getMinecraft().player.ticksExisted + partialTicks) * 0.1F) * 0.04F, 0.5);
+                GlStateManager.translate(0.5, (isBlock ? 18/16F : 19/16F) + MathHelper.sin((Minecraft.getMinecraft().player.ticksExisted + partialTicks) * 0.1F) * 0.04F, 0.5);
                 double scale = isBlock ? 0.25 : 0.5;
                 GlStateManager.scale(scale, scale, scale);
-                GlStateManager.rotate((podium.getWorld().getTotalWorldTime() + partialTicks) * 0.02F * 90, 0, 1.0F, 0);
+                float angleShift = (float) MathHelper.clamp(((double) MathHelper.getPositionRandom(new Vec3i(podium.getPos().getX(), podium.getPos().getY(), podium.getPos().getZ())) / Long.MAX_VALUE), -1.0, 1.0);
+                GlStateManager.rotate((podium.getWorld().getTotalWorldTime() + partialTicks + (angleShift * 20F)) * 0.02F * 90, 0, 1.0F, 0);
                 RENDER_ITEM.renderItem(podium.stack, ItemCameraTransforms.TransformType.NONE);
                 GlStateManager.popMatrix();
             }

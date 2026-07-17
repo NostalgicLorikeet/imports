@@ -8,6 +8,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -150,7 +151,13 @@ public class TileEntityPodium extends TileEntity {
     @Override
     @SideOnly(Side.CLIENT)
     public double getMaxRenderDistanceSquared() {
-        double maxBlocks = Minecraft.getMinecraft().gameSettings.renderDistanceChunks * 2.0;
+        double maxBlocks = Minecraft.getMinecraft().gameSettings.renderDistanceChunks * 1.5;
         return maxBlocks * maxBlocks;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox() {
+        return new AxisAlignedBB(pos.add(-0.5, -0.5, -0.5), pos.add(1, 1, 1));
     }
 }
