@@ -30,8 +30,7 @@ item.dyed_gas_tube_green.name=Green Dyed Gas Tube
 item.dyed_gas_tube_red.name=Red Dyed Gas Tube
 item.dyed_gas_tube_black.name=Black Dyed Gas Tube
 item.glyph_template.name=Glyph Template
-item.glyph_template_blank.name=Blank Glyph Template
 
-item.glyph_template.tooltip.blank = Blank
+item.glyph_template.tooltip.blank=Blank
 
 itemGroup.woodworks=Woodworks
