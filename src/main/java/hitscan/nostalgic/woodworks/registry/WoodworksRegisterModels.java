@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -27,6 +28,22 @@ public class WoodworksRegisterModels {
                     new ModelResourceLocation(block.getRegistryName(), "inventory")
             );
         }
+
+        for (int i = 0; i < 16; i++) {
+            String color = EnumDyeColor.byMetadata(i).getTranslationKey();
+
+            ModelLoader.setCustomModelResourceLocation(
+                    WoodworksItems.DYED_GAS_TUBE,
+                    i,
+                    new ModelResourceLocation(WoodworksItems.DYED_GAS_TUBE.getRegistryName() + "_" + color, "inventory")
+            );
+        }
+
+        ModelLoader.setCustomModelResourceLocation(
+                WoodworksItems.GLYPH_TEMPLATE,
+                0,
+                new ModelResourceLocation(WoodworksItems.GLYPH_TEMPLATE.getRegistryName(), "inventory")
+        );
     }
 
     @SubscribeEvent

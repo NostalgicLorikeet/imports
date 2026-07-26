@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "active=true": { "model": "woodworks:letter_board_on" },
+    "active=false": { "model": "woodworks:letter_board" }
+  }
+}

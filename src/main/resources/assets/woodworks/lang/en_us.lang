@@ -5,10 +5,33 @@ tile.chained_display_shelf.name=Chained Display Shelf
 tile.hanging_display_shelf.name=Hanging Display Shelf
 tile.podium.name=Podium
 tile.podium_trophy.name=Trophy Podium
+tile.letter_board.name=Letter Board
+tile.letter_board_inverted.name=Letter Board (Inverted)
 
 tile.display_shelf.tooltip.one=Right-click an empty slot to insert an item
 tile.display_shelf.tooltip.two=Right-click with an empty hand or the same item to extract one
 tile.display_shelf.tooltip.three=Shift-right-click with an empty hand to extract all
 tile.shelf.tooltip=Used to hold up blocks
+
+item.dyed_gas_tube_white.name=White Dyed Gas Tube
+item.dyed_gas_tube_orange.name=Orange Dyed Gas Tube
+item.dyed_gas_tube_magenta.name=Magenta Dyed Gas Tube
+item.dyed_gas_tube_lightBlue.name=Light Blue Dyed Gas Tube
+item.dyed_gas_tube_yellow.name=Yellow Dyed Gas Tube
+item.dyed_gas_tube_lime.name=Lime Dyed Gas Tube
+item.dyed_gas_tube_pink.name=Pink Dyed Gas Tube
+item.dyed_gas_tube_gray.name=Gray Dyed Gas Tube
+item.dyed_gas_tube_silver.name=Silver Dyed Gas Tube
+item.dyed_gas_tube_cyan.name=Cyan Dyed Gas Tube
+item.dyed_gas_tube_purple.name=Purple Dyed Gas Tube
+item.dyed_gas_tube_blue.name=Blue Dyed Gas Tube
+item.dyed_gas_tube_brown.name=Brown Dyed Gas Tube
+item.dyed_gas_tube_green.name=Green Dyed Gas Tube
+item.dyed_gas_tube_red.name=Red Dyed Gas Tube
+item.dyed_gas_tube_black.name=Black Dyed Gas Tube
+item.glyph_template.name=Glyph Template
+item.glyph_template_blank.name=Blank Glyph Template
+
+item.glyph_template.tooltip.blank = Blank
 
 itemGroup.woodworks=Woodworks

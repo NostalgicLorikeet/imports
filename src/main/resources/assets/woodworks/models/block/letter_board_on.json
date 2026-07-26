@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "woodworks:blocks/letter_board_on"
+  }
+}

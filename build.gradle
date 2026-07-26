@@ -108,6 +108,11 @@ repositories {
         name 'CleanroomMC Maven'
         url 'https://maven.cleanroommc.com'
     }
+
+    maven {
+        name = "covers1624"
+        url = "https://maven.covers1624.net/repository/maven-hosted/"
+    }
 }
 
 dependencies {
@@ -148,6 +153,9 @@ dependencies {
         testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     }
+
+    implementation ("curse.maven:gregtech-ce-unofficial-557242:5519023")
+    compileOnly ("codechicken:CodeChickenLib:1.12.2-3.2.3.358:deobf")
 }
 
 apply from: 'gradle/scripts/dependencies.gradle'

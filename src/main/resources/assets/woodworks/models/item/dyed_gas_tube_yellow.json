@@ -1,0 +1,8 @@
+
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "woodworks:items/dyed_gas_tube/gas_yellow",
+    "layer1": "woodworks:items/dyed_gas_tube"
+  }
+}

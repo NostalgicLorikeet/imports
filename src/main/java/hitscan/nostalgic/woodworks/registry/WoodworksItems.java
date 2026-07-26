@@ -2,6 +2,9 @@ package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Woodworks;
 import hitscan.nostalgic.woodworks.Tags;
+import hitscan.nostalgic.woodworks.blocks.BlockLetterBoard;
+import hitscan.nostalgic.woodworks.items.ItemDyedGasTube;
+import hitscan.nostalgic.woodworks.items.ItemGlyphTemplate;
 import hitscan.nostalgic.woodworks.items.ItemShelf;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -22,6 +25,10 @@ public class WoodworksItems {
     public static final Item SHELF_DISPLAY_HANGING = new ItemShelf(WoodworksBlocks.SHELF_DISPLAY_HANGING);
     public static final Item PODIUM = new ItemBlock(WoodworksBlocks.PODIUM);
     public static final Item PODIUM_TROPHY = new ItemBlock(WoodworksBlocks.PODIUM_TROPHY);
+    public static final Item LETTER_BOARD = new ItemBlock(WoodworksBlocks.LETTER_BOARD);
+    public static final Item LETTER_BOARD_INVERTED = new ItemBlock(WoodworksBlocks.LETTER_BOARD_INVERTED);
+    public static final Item DYED_GAS_TUBE = new ItemDyedGasTube();
+    public static final Item GLYPH_TEMPLATE = new ItemGlyphTemplate();
 
     @SubscribeEvent
     public static void blocks(RegistryEvent.Register<Item> event) {
@@ -32,6 +39,10 @@ public class WoodworksItems {
         items.add(SHELF_DISPLAY_HANGING);
         items.add(PODIUM);
         items.add(PODIUM_TROPHY);
+        items.add(LETTER_BOARD);
+        items.add(LETTER_BOARD_INVERTED);
+        items.add(DYED_GAS_TUBE);
+        items.add(GLYPH_TEMPLATE);
 
         for (Item item : items) {
             item.setCreativeTab(Woodworks.CREATIVE_TAB);

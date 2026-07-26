@@ -2,6 +2,7 @@ package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Woodworks;
 import hitscan.nostalgic.woodworks.Tags;
+import hitscan.nostalgic.woodworks.blocks.BlockLetterBoard;
 import hitscan.nostalgic.woodworks.blocks.BlockPodium;
 import hitscan.nostalgic.woodworks.blocks.BlockShelf;
 import net.minecraft.block.Block;
@@ -71,6 +72,8 @@ public class WoodworksBlocks {
     );
     public static final BlockPodium PODIUM = new BlockPodium("podium");
     public static final BlockPodium PODIUM_TROPHY = new BlockPodium("podium_trophy");
+    public static final BlockLetterBoard LETTER_BOARD = new BlockLetterBoard(false);
+    public static final BlockLetterBoard LETTER_BOARD_INVERTED = new BlockLetterBoard(!false);
 
     @SubscribeEvent
     public static void blocks(RegistryEvent.Register<Block> event) {
@@ -81,6 +84,8 @@ public class WoodworksBlocks {
         BLOCKS.add(SHELF_DISPLAY_HANGING);
         BLOCKS.add(PODIUM);
         BLOCKS.add(PODIUM_TROPHY);
+        BLOCKS.add(LETTER_BOARD);
+        BLOCKS.add(LETTER_BOARD_INVERTED);
 
         SHELVES.add(SHELF_SHORT);
         SHELVES.add(SHELF_LONG);
