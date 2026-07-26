@@ -65,4 +65,9 @@ public class BlockLetterBoard extends Block {
                 ACTIVE
         );
     }
+
+    @Override
+    public int getLightValue(IBlockState state) {
+        return state.getValue(ACTIVE) ? 10 : 0;
+    }
 }

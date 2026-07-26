@@ -26,6 +26,8 @@ public class WoodworksItems {
     public static final Item LETTER_BOARD = new ItemBlock(WoodworksBlocks.LETTER_BOARD);
     public static final Item LETTER_BOARD_INVERTED = new ItemBlock(WoodworksBlocks.LETTER_BOARD_INVERTED);
     public static final Item DYED_GAS_TUBE = new ItemDyedGasTube();
+    public static final Item NEON_GLYPH_BLOCK = new ItemBlock(WoodworksBlocks.NEON_GLYPH_BLOCK);
+    public static final Item NEON_GLYPH_BLOCK_INVERTED = new ItemBlock(WoodworksBlocks.NEON_GLYPH_BLOCK_INVERTED);
 
     @SubscribeEvent
     public static void blocks(RegistryEvent.Register<Item> event) {
@@ -39,6 +41,8 @@ public class WoodworksItems {
         items.add(LETTER_BOARD);
         items.add(LETTER_BOARD_INVERTED);
         items.add(DYED_GAS_TUBE);
+        items.add(NEON_GLYPH_BLOCK);
+        items.add(NEON_GLYPH_BLOCK_INVERTED);
 
         for (Item item : items) {
             item.setCreativeTab(Woodworks.CREATIVE_TAB);

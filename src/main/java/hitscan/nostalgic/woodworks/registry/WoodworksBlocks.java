@@ -3,6 +3,7 @@ package hitscan.nostalgic.woodworks.registry;
 import hitscan.nostalgic.woodworks.Woodworks;
 import hitscan.nostalgic.woodworks.Tags;
 import hitscan.nostalgic.woodworks.blocks.BlockLetterBoard;
+import hitscan.nostalgic.woodworks.blocks.BlockNeonGlyph;
 import hitscan.nostalgic.woodworks.blocks.BlockPodium;
 import hitscan.nostalgic.woodworks.blocks.BlockShelf;
 import net.minecraft.block.Block;
@@ -19,6 +20,7 @@ public class WoodworksBlocks {
     static ArrayList<Block> BLOCKS = new ArrayList<>();
     static ArrayList<BlockShelf> SHELVES = new ArrayList<>();
     static ArrayList<BlockPodium> PODIUMS = new ArrayList<>();
+    static ArrayList<BlockNeonGlyph> NEON_GLYPHS = new ArrayList<>();
 
     public static final BlockShelf SHELF_SHORT = new BlockShelf(
             "short_shelf",
@@ -74,6 +76,8 @@ public class WoodworksBlocks {
     public static final BlockPodium PODIUM_TROPHY = new BlockPodium("podium_trophy");
     public static final BlockLetterBoard LETTER_BOARD = new BlockLetterBoard(false);
     public static final BlockLetterBoard LETTER_BOARD_INVERTED = new BlockLetterBoard(!false);
+    public static final BlockNeonGlyph NEON_GLYPH_BLOCK = new BlockNeonGlyph(false);
+    public static final BlockNeonGlyph NEON_GLYPH_BLOCK_INVERTED = new BlockNeonGlyph(true);
 
     @SubscribeEvent
     public static void blocks(RegistryEvent.Register<Block> event) {
@@ -86,6 +90,8 @@ public class WoodworksBlocks {
         BLOCKS.add(PODIUM_TROPHY);
         BLOCKS.add(LETTER_BOARD);
         BLOCKS.add(LETTER_BOARD_INVERTED);
+        BLOCKS.add(NEON_GLYPH_BLOCK);
+        BLOCKS.add(NEON_GLYPH_BLOCK_INVERTED);
 
         SHELVES.add(SHELF_SHORT);
         SHELVES.add(SHELF_LONG);
@@ -95,6 +101,9 @@ public class WoodworksBlocks {
 
         PODIUMS.add(PODIUM);
         PODIUMS.add(PODIUM_TROPHY);
+
+        NEON_GLYPHS.add(NEON_GLYPH_BLOCK);
+        NEON_GLYPHS.add(NEON_GLYPH_BLOCK_INVERTED);
 
         for (Block block : BLOCKS) {
             block.setCreativeTab(Woodworks.CREATIVE_TAB);

@@ -1,8 +1,10 @@
 package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Tags;
+import hitscan.nostalgic.woodworks.blocks.BlockNeonGlyph;
 import hitscan.nostalgic.woodworks.blocks.BlockPodium;
 import hitscan.nostalgic.woodworks.blocks.BlockShelf;
+import hitscan.nostalgic.woodworks.client.render.blocks.ModelNeonGlyphBlock;
 import hitscan.nostalgic.woodworks.client.render.blocks.ModelPodium;
 import hitscan.nostalgic.woodworks.client.render.blocks.ModelShelf;
 import net.minecraft.block.Block;
@@ -38,12 +40,6 @@ public class WoodworksRegisterModels {
                     new ModelResourceLocation(WoodworksItems.DYED_GAS_TUBE.getRegistryName() + "_" + color, "inventory")
             );
         }
-
-        ModelLoader.setCustomModelResourceLocation(
-                WoodworksItems.GLYPH_TEMPLATE,
-                0,
-                new ModelResourceLocation(WoodworksItems.GLYPH_TEMPLATE.getRegistryName(), "inventory")
-        );
     }
 
     @SubscribeEvent
@@ -72,6 +68,18 @@ public class WoodworksRegisterModels {
 
             ModelResourceLocation mrl = new ModelResourceLocation(podium.getRegistryName(), "inventory");
             event.getModelRegistry().putObject(mrl, new ModelPodium(event.getModelRegistry().getObject(mrl)));
+        }
+
+        for (BlockNeonGlyph neonGlyph : WoodworksBlocks.NEON_GLYPHS) {
+            for (IBlockState state : neonGlyph.getBlockState().getValidStates()) {
+                String stateName = defaultStateMapper.getPropertyString(state.getProperties());
+
+                ModelResourceLocation mrl = new ModelResourceLocation(neonGlyph.getRegistryName(), stateName);
+                event.getModelRegistry().putObject(mrl, new ModelNeonGlyphBlock(event.getModelRegistry().getObject(mrl)));
+            }
+
+            //ModelResourceLocation mrl = new ModelResourceLocation(neonGlyph.getRegistryName(), "inventory");
+            //event.getModelRegistry().putObject(mrl, new ModelNeonGlyphBlock(event.getModelRegistry().getObject(mrl)));
         }
     }
 }

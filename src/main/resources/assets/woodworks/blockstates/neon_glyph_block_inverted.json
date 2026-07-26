@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "active=true,facing=north": { "model": "woodworks:neon_glyph_block" },
+    "active=true,facing=south": { "model": "woodworks:neon_glyph_block", "y": 180 },
+    "active=true,facing=west":  { "model": "woodworks:neon_glyph_block", "y": 270 },
+    "active=true,facing=east":  { "model": "woodworks:neon_glyph_block", "y": 90 },
+    "active=true,facing=up":    { "model": "woodworks:neon_glyph_block", "x": 270 },
+    "active=true,facing=down":  { "model": "woodworks:neon_glyph_block", "x": 90 },
+    "active=false,facing=north": { "model": "woodworks:neon_glyph_block" },
+    "active=false,facing=south": { "model": "woodworks:neon_glyph_block", "y": 180 },
+    "active=false,facing=west":  { "model": "woodworks:neon_glyph_block", "y": 270 },
+    "active=false,facing=east":  { "model": "woodworks:neon_glyph_block", "y": 90 },
+    "active=false,facing=up":    { "model": "woodworks:neon_glyph_block", "x": 270 },
+    "active=false,facing=down":  { "model": "woodworks:neon_glyph_block", "x": 90 }
+  }
+}

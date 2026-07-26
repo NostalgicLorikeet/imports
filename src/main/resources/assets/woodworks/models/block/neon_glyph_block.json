@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "front": "woodworks:blocks/neon_glyph_block_front",
+    "side": "woodworks:blocks/neon_glyph_block_side",
+    "top": "woodworks:blocks/neon_glyph_block_side",
+    "bottom": "woodworks:blocks/neon_glyph_block_side"
+  }
+}

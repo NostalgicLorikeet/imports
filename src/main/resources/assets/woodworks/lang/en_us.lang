@@ -7,6 +7,8 @@ tile.podium.name=Podium
 tile.podium_trophy.name=Trophy Podium
 tile.letter_board.name=Letter Board
 tile.letter_board_inverted.name=Letter Board (Inverted)
+tile.neon_glyph_block.name=Neon Glyph Block
+tile.neon_glyph_block_inverted.name=Neon Glyph Block (Inverted)
 
 tile.display_shelf.tooltip.one=Right-click an empty slot to insert an item
 tile.display_shelf.tooltip.two=Right-click with an empty hand or the same item to extract one
