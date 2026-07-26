@@ -1,8 +1,6 @@
 package hitscan.nostalgic.woodworks.client.render.blocks;
 
 import codechicken.lib.render.CCQuad;
-import codechicken.lib.vec.TransformationList;
-import codechicken.lib.vec.Translation;
 import codechicken.lib.vec.uv.UVScale;
 import codechicken.lib.vec.uv.UVTransformationList;
 import codechicken.lib.vec.uv.UVTranslation;
@@ -41,19 +39,22 @@ public class ModelNeonGlyphBlock  implements IBakedModel {
             if (side == state.getValue(BlockNeonGlyph.FACING)) {
                 BakedQuad glyphQuad = new BakedQuadRetextured(quad, asciiGlyphTexture);
 
+                int targetColor = active ? 0xFFFFA663 : 0x7FFFA663; //abgr
+                int[] vertexData = glyphQuad.getVertexData();
+
+                for (int i = 3; i < vertexData.length; i += 7) {
+                    vertexData[i] = targetColor;
+                }
+
                 CCQuad ccQuad = new CCQuad(glyphQuad);
 
                 UVTransformationList uvTransformationList = new UVTransformationList(
                         new UVScale((2/16F)),
-                        new UVTranslation(1/16F, 1/16F)
-                );
-
-                TransformationList transformationList = new TransformationList(
-                        new Translation(facing.getXOffset() * 0.001, facing.getYOffset() * 0.001, facing.getZOffset() * 0.001)
+                        new UVTranslation(10/128F, 11/128F)
                 );
 
                 ccQuad.apply(uvTransformationList);
-                ccQuad.apply(transformationList);
+
                 glyphQuad = ccQuad.bake();
 
                 if (active) glyphQuad = RenderUtil.makeEmissive(glyphQuad);
