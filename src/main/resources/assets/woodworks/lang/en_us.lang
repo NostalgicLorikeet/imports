@@ -5,10 +5,10 @@ tile.chained_display_shelf.name=Chained Display Shelf
 tile.hanging_display_shelf.name=Hanging Display Shelf
 tile.podium.name=Podium
 tile.podium_trophy.name=Trophy Podium
-tile.letter_board.name=Letter Board
-tile.letter_board_inverted.name=Letter Board (Inverted)
-tile.neon_glyph_block.name=Neon Glyph Block
-tile.neon_glyph_block_inverted.name=Neon Glyph Block (Inverted)
+tile.glyph_holder_2x2.name=2x2 Neon Glyph Holder
+tile.glyph_holder_inverted_2x2.name=2x2 Neon Glyph Holder (Inverted)
+tile.glyph_holder_4x4.name=4x4 Neon Glyph Holder
+tile.glyph_holder_inverted_4x4.name=4x4 Neon Glyph Holder (Inverted)
 
 tile.display_shelf.tooltip.one=Right-click an empty slot to insert an item
 tile.display_shelf.tooltip.two=Right-click with an empty hand or the same item to extract one

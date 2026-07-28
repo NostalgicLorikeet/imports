@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "active=true,facing=north": { "model": "woodworks:glyph_holder" },
+    "active=true,facing=south": { "model": "woodworks:glyph_holder", "y": 180 },
+    "active=true,facing=west":  { "model": "woodworks:glyph_holder", "y": 270 },
+    "active=true,facing=east":  { "model": "woodworks:glyph_holder", "y": 90 },
+    "active=false,facing=north": { "model": "woodworks:glyph_holder" },
+    "active=false,facing=south": { "model": "woodworks:glyph_holder", "y": 180 },
+    "active=false,facing=west":  { "model": "woodworks:glyph_holder", "y": 270 },
+    "active=false,facing=east":  { "model": "woodworks:glyph_holder", "y": 90 }
+  }
+}

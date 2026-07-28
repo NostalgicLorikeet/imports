@@ -3,6 +3,7 @@ package hitscan.nostalgic.woodworks.registry;
 import hitscan.nostalgic.woodworks.Tags;
 import hitscan.nostalgic.woodworks.client.render.tileentities.TileEntitySpecialRendererPodium;
 import hitscan.nostalgic.woodworks.client.render.tileentities.TileEntitySpecialRendererShelf;
+import hitscan.nostalgic.woodworks.tileentities.TileEntityGlyphHolder;
 import hitscan.nostalgic.woodworks.tileentities.TileEntityPodium;
 import hitscan.nostalgic.woodworks.tileentities.TileEntityShelf;
 import net.minecraft.util.ResourceLocation;
@@ -13,6 +14,7 @@ public class WoodworksTileEntities {
     public static void regsiterTileEntities() {
         GameRegistry.registerTileEntity(TileEntityShelf.class, new ResourceLocation(Tags.MOD_ID, "shelf"));
         GameRegistry.registerTileEntity(TileEntityPodium.class, new ResourceLocation(Tags.MOD_ID, "podium"));
+        GameRegistry.registerTileEntity(TileEntityGlyphHolder.class, new ResourceLocation(Tags.MOD_ID, "glyph_holder"));
     }
 
     public static void registerTESRs() {

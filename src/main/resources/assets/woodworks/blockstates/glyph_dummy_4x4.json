@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "woodworks:glyph_holder_quads/glyph_holder_4x4" },
+    "facing=south": { "model": "woodworks:glyph_holder_quads/glyph_holder_4x4", "y": 180 },
+    "facing=west":  { "model": "woodworks:glyph_holder_quads/glyph_holder_4x4", "y": 270 },
+    "facing=east":  { "model": "woodworks:glyph_holder_quads/glyph_holder_4x4", "y": 90 }
+  }
+}

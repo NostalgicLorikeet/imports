@@ -1,10 +1,11 @@
 package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Tags;
-import hitscan.nostalgic.woodworks.blocks.BlockNeonGlyph;
+import hitscan.nostalgic.woodworks.blocks.BlockGlyphDummy;
+import hitscan.nostalgic.woodworks.blocks.BlockGlyphHolder;
 import hitscan.nostalgic.woodworks.blocks.BlockPodium;
 import hitscan.nostalgic.woodworks.blocks.BlockShelf;
-import hitscan.nostalgic.woodworks.client.render.blocks.ModelNeonGlyphBlock;
+import hitscan.nostalgic.woodworks.client.render.blocks.ModelGlyphHolder;
 import hitscan.nostalgic.woodworks.client.render.blocks.ModelPodium;
 import hitscan.nostalgic.woodworks.client.render.blocks.ModelShelf;
 import net.minecraft.block.Block;
@@ -70,16 +71,23 @@ public class WoodworksRegisterModels {
             event.getModelRegistry().putObject(mrl, new ModelPodium(event.getModelRegistry().getObject(mrl)));
         }
 
-        for (BlockNeonGlyph neonGlyph : WoodworksBlocks.NEON_GLYPHS) {
-            for (IBlockState state : neonGlyph.getBlockState().getValidStates()) {
+        for (BlockGlyphHolder glyphHolder : WoodworksBlocks.GLYPH_HOLDERS) {
+            for (IBlockState state : glyphHolder.getBlockState().getValidStates()) {
                 String stateName = defaultStateMapper.getPropertyString(state.getProperties());
 
-                ModelResourceLocation mrl = new ModelResourceLocation(neonGlyph.getRegistryName(), stateName);
-                event.getModelRegistry().putObject(mrl, new ModelNeonGlyphBlock(event.getModelRegistry().getObject(mrl)));
+                ModelResourceLocation mrl = new ModelResourceLocation(glyphHolder.getRegistryName(), stateName);
+                event.getModelRegistry().putObject(mrl, new ModelGlyphHolder(event.getModelRegistry().getObject(mrl), glyphHolder.isDouble()));
             }
+        }
 
-            //ModelResourceLocation mrl = new ModelResourceLocation(neonGlyph.getRegistryName(), "inventory");
-            //event.getModelRegistry().putObject(mrl, new ModelNeonGlyphBlock(event.getModelRegistry().getObject(mrl)));
+        for (BlockGlyphDummy glyphDummy : WoodworksBlocks.GLYPH_HOLDER_DUMMIES) {
+            for (IBlockState state : glyphDummy.getBlockState().getValidStates()) {
+                String stateName = defaultStateMapper.getPropertyString(state.getProperties());
+
+                ModelResourceLocation mrl = new ModelResourceLocation(glyphDummy.getRegistryName(), stateName);
+                if (glyphDummy == WoodworksBlocks.GLYPH_2X2) ModelGlyphHolder.GLYPH_HOLDER_2x2_MODELS.put(state.getValue(BlockGlyphDummy.FACING), event.getModelRegistry().getObject(mrl));
+                if (glyphDummy == WoodworksBlocks.GLYPH_4X4) ModelGlyphHolder.GLYPH_HOLDER_4x4_MODELS.put(state.getValue(BlockGlyphDummy.FACING), event.getModelRegistry().getObject(mrl));
+            }
         }
     }
 }

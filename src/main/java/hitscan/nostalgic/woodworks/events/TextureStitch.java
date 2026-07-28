@@ -1,6 +1,7 @@
 package hitscan.nostalgic.woodworks.events;
 
 import hitscan.nostalgic.woodworks.Tags;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,8 +14,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TextureStitch {
     @SubscribeEvent
     public static void textureStitch(TextureStitchEvent.Pre event) {
-        if (event.getMap() == net.minecraft.client.Minecraft.getMinecraft().getTextureMapBlocks()) {
-            event.getMap().registerSprite(new ResourceLocation("minecraft", "font/ascii"));
+        if (event.getMap() == Minecraft.getMinecraft().getTextureMapBlocks()) {
+            for (int i = 0; i < 256; i++) {
+                event.getMap().registerSprite(new ResourceLocation("woodworks","font/ascii_glyph_"+i));
+            }
         }
     }
 }

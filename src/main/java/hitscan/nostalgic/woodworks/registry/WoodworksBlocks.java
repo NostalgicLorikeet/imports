@@ -2,10 +2,10 @@ package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Woodworks;
 import hitscan.nostalgic.woodworks.Tags;
-import hitscan.nostalgic.woodworks.blocks.BlockLetterBoard;
-import hitscan.nostalgic.woodworks.blocks.BlockNeonGlyph;
+import hitscan.nostalgic.woodworks.blocks.BlockGlyphDummy;
 import hitscan.nostalgic.woodworks.blocks.BlockPodium;
 import hitscan.nostalgic.woodworks.blocks.BlockShelf;
+import hitscan.nostalgic.woodworks.blocks.BlockGlyphHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -20,7 +20,8 @@ public class WoodworksBlocks {
     static ArrayList<Block> BLOCKS = new ArrayList<>();
     static ArrayList<BlockShelf> SHELVES = new ArrayList<>();
     static ArrayList<BlockPodium> PODIUMS = new ArrayList<>();
-    static ArrayList<BlockNeonGlyph> NEON_GLYPHS = new ArrayList<>();
+    static ArrayList<BlockGlyphHolder> GLYPH_HOLDERS = new ArrayList<>();
+    static ArrayList<BlockGlyphDummy> GLYPH_HOLDER_DUMMIES = new ArrayList<>();
 
     public static final BlockShelf SHELF_SHORT = new BlockShelf(
             "short_shelf",
@@ -74,10 +75,12 @@ public class WoodworksBlocks {
     );
     public static final BlockPodium PODIUM = new BlockPodium("podium");
     public static final BlockPodium PODIUM_TROPHY = new BlockPodium("podium_trophy");
-    public static final BlockLetterBoard LETTER_BOARD = new BlockLetterBoard(false);
-    public static final BlockLetterBoard LETTER_BOARD_INVERTED = new BlockLetterBoard(!false);
-    public static final BlockNeonGlyph NEON_GLYPH_BLOCK = new BlockNeonGlyph(false);
-    public static final BlockNeonGlyph NEON_GLYPH_BLOCK_INVERTED = new BlockNeonGlyph(true);
+    public static final BlockGlyphHolder GLYPH_HOLDER_2X2 = new BlockGlyphHolder(false, false);
+    public static final BlockGlyphHolder GLYPH_HOLDER_INVERTED_2X2 = new BlockGlyphHolder(true, false);
+    public static final BlockGlyphHolder GLYPH_HOLDER_4X4 = new BlockGlyphHolder(false, true);
+    public static final BlockGlyphHolder GLYPH_HOLDER_INVERTED_4X4 = new BlockGlyphHolder(true, true);
+    public static final BlockGlyphDummy GLYPH_2X2 = new BlockGlyphDummy("glyph_dummy_2x2");
+    public static final BlockGlyphDummy GLYPH_4X4 = new BlockGlyphDummy("glyph_dummy_4x4");
 
     @SubscribeEvent
     public static void blocks(RegistryEvent.Register<Block> event) {
@@ -88,10 +91,10 @@ public class WoodworksBlocks {
         BLOCKS.add(SHELF_DISPLAY_HANGING);
         BLOCKS.add(PODIUM);
         BLOCKS.add(PODIUM_TROPHY);
-        BLOCKS.add(LETTER_BOARD);
-        BLOCKS.add(LETTER_BOARD_INVERTED);
-        BLOCKS.add(NEON_GLYPH_BLOCK);
-        BLOCKS.add(NEON_GLYPH_BLOCK_INVERTED);
+        BLOCKS.add(GLYPH_HOLDER_2X2);
+        BLOCKS.add(GLYPH_HOLDER_INVERTED_2X2);
+        BLOCKS.add(GLYPH_HOLDER_4X4);
+        BLOCKS.add(GLYPH_HOLDER_INVERTED_4X4);
 
         SHELVES.add(SHELF_SHORT);
         SHELVES.add(SHELF_LONG);
@@ -102,12 +105,20 @@ public class WoodworksBlocks {
         PODIUMS.add(PODIUM);
         PODIUMS.add(PODIUM_TROPHY);
 
-        NEON_GLYPHS.add(NEON_GLYPH_BLOCK);
-        NEON_GLYPHS.add(NEON_GLYPH_BLOCK_INVERTED);
+        GLYPH_HOLDERS.add(GLYPH_HOLDER_2X2);
+        GLYPH_HOLDERS.add(GLYPH_HOLDER_INVERTED_2X2);
+        GLYPH_HOLDERS.add(GLYPH_HOLDER_4X4);
+        GLYPH_HOLDERS.add(GLYPH_HOLDER_INVERTED_4X4);
 
         for (Block block : BLOCKS) {
             block.setCreativeTab(Woodworks.CREATIVE_TAB);
             event.getRegistry().register(block);
         }
+
+        event.getRegistry().register(GLYPH_2X2);
+        event.getRegistry().register(GLYPH_4X4);
+
+        GLYPH_HOLDER_DUMMIES.add(GLYPH_2X2);
+        GLYPH_HOLDER_DUMMIES.add(GLYPH_4X4);
     }
 }
