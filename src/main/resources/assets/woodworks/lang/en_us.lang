@@ -5,10 +5,13 @@ tile.chained_display_shelf.name=Chained Display Shelf
 tile.hanging_display_shelf.name=Hanging Display Shelf
 tile.podium.name=Podium
 tile.podium_trophy.name=Trophy Podium
+tile.glyph_holder_1x1.name=1x1 Neon Glyph Holder
+tile.glyph_holder_inverted_1x1.name=1x1 Neon Glyph Holder (Inverted)
 tile.glyph_holder_2x2.name=2x2 Neon Glyph Holder
 tile.glyph_holder_inverted_2x2.name=2x2 Neon Glyph Holder (Inverted)
 tile.glyph_holder_4x4.name=4x4 Neon Glyph Holder
 tile.glyph_holder_inverted_4x4.name=4x4 Neon Glyph Holder (Inverted)
+tile.signpost.name=Signpost
 
 tile.display_shelf.tooltip.one=Right-click an empty slot to insert an item
 tile.display_shelf.tooltip.two=Right-click with an empty hand or the same item to extract one
@@ -32,6 +35,7 @@ item.dyed_gas_tube_green.name=Green Dyed Gas Tube
 item.dyed_gas_tube_red.name=Red Dyed Gas Tube
 item.dyed_gas_tube_black.name=Black Dyed Gas Tube
 item.glyph_template.name=Glyph Template
+item.neon_glyph.name=Neon Glyph
 
 item.glyph_template.tooltip.blank=Blank
 

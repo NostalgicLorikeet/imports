@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "woodworks:items/neon_glyph",
+    "layer1": "woodworks:font/ascii_glyph_0"
+  }
+}

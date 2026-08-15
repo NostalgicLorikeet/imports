@@ -6,6 +6,7 @@ import hitscan.nostalgic.woodworks.client.render.tileentities.TileEntitySpecialR
 import hitscan.nostalgic.woodworks.tileentities.TileEntityGlyphHolder;
 import hitscan.nostalgic.woodworks.tileentities.TileEntityPodium;
 import hitscan.nostalgic.woodworks.tileentities.TileEntityShelf;
+import hitscan.nostalgic.woodworks.tileentities.TileEntitySignpost;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -15,6 +16,7 @@ public class WoodworksTileEntities {
         GameRegistry.registerTileEntity(TileEntityShelf.class, new ResourceLocation(Tags.MOD_ID, "shelf"));
         GameRegistry.registerTileEntity(TileEntityPodium.class, new ResourceLocation(Tags.MOD_ID, "podium"));
         GameRegistry.registerTileEntity(TileEntityGlyphHolder.class, new ResourceLocation(Tags.MOD_ID, "glyph_holder"));
+        GameRegistry.registerTileEntity(TileEntitySignpost.class, new ResourceLocation(Tags.MOD_ID, "signpost"));
     }
 
     public static void registerTESRs() {

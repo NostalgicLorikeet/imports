@@ -1,15 +1,15 @@
 package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Tags;
-import hitscan.nostalgic.woodworks.blocks.BlockGlyphDummy;
-import hitscan.nostalgic.woodworks.blocks.BlockGlyphHolder;
-import hitscan.nostalgic.woodworks.blocks.BlockPodium;
-import hitscan.nostalgic.woodworks.blocks.BlockShelf;
+import hitscan.nostalgic.woodworks.blocks.*;
 import hitscan.nostalgic.woodworks.client.render.blocks.ModelGlyphHolder;
 import hitscan.nostalgic.woodworks.client.render.blocks.ModelPodium;
 import hitscan.nostalgic.woodworks.client.render.blocks.ModelShelf;
+import hitscan.nostalgic.woodworks.client.render.blocks.ModelSignpost;
+import hitscan.nostalgic.woodworks.client.render.items.ModelNeonGlyph;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.item.EnumDyeColor;
@@ -41,10 +41,33 @@ public class WoodworksRegisterModels {
                     new ModelResourceLocation(WoodworksItems.DYED_GAS_TUBE.getRegistryName() + "_" + color, "inventory")
             );
         }
+
+        for (int i = 0; i < 16; i++) {
+            ModelLoader.setCustomModelResourceLocation(
+                    WoodworksItems.NEON_GLYPH,
+                    i,
+                    new ModelResourceLocation(WoodworksItems.NEON_GLYPH.getRegistryName(), "inventory")
+            );
+        }
+
+        ModelLoader.setCustomModelResourceLocation(
+                WoodworksItems.TEST,
+                0,
+                new ModelResourceLocation(WoodworksItems.TEST.getRegistryName(), "inventory")
+        );
     }
 
     @SubscribeEvent
     public static void bakeModels(ModelBakeEvent event) {
+        ModelResourceLocation glyphMRL = new ModelResourceLocation(
+            WoodworksItems.NEON_GLYPH.getRegistryName(), "inventory"
+        );
+
+        IBakedModel neonGlyphModel = event.getModelRegistry().getObject(glyphMRL);
+        if (neonGlyphModel != null) {
+            event.getModelRegistry().putObject(glyphMRL, new ModelNeonGlyph(neonGlyphModel));
+        }
+
         DefaultStateMapper defaultStateMapper = new DefaultStateMapper();
 
         for (BlockShelf shelf : WoodworksBlocks.SHELVES) {
@@ -76,7 +99,7 @@ public class WoodworksRegisterModels {
                 String stateName = defaultStateMapper.getPropertyString(state.getProperties());
 
                 ModelResourceLocation mrl = new ModelResourceLocation(glyphHolder.getRegistryName(), stateName);
-                event.getModelRegistry().putObject(mrl, new ModelGlyphHolder(event.getModelRegistry().getObject(mrl), glyphHolder.isDouble()));
+                event.getModelRegistry().putObject(mrl, new ModelGlyphHolder(event.getModelRegistry().getObject(mrl), glyphHolder.getDim()));
             }
         }
 
@@ -85,8 +108,20 @@ public class WoodworksRegisterModels {
                 String stateName = defaultStateMapper.getPropertyString(state.getProperties());
 
                 ModelResourceLocation mrl = new ModelResourceLocation(glyphDummy.getRegistryName(), stateName);
+                if (glyphDummy == WoodworksBlocks.GLYPH_1X1) ModelGlyphHolder.GLYPH_HOLDER_1x1_MODELS.put(state.getValue(BlockGlyphDummy.FACING), event.getModelRegistry().getObject(mrl));
                 if (glyphDummy == WoodworksBlocks.GLYPH_2X2) ModelGlyphHolder.GLYPH_HOLDER_2x2_MODELS.put(state.getValue(BlockGlyphDummy.FACING), event.getModelRegistry().getObject(mrl));
                 if (glyphDummy == WoodworksBlocks.GLYPH_4X4) ModelGlyphHolder.GLYPH_HOLDER_4x4_MODELS.put(state.getValue(BlockGlyphDummy.FACING), event.getModelRegistry().getObject(mrl));
+            }
+        }
+
+        IBakedModel signpostModel =  new ModelSignpost();
+
+        for (BlockSignpost signpost : WoodworksBlocks.SIGNPOSTS) {
+            for (IBlockState state : signpost.getBlockState().getValidStates()) {
+                String stateName = defaultStateMapper.getPropertyString(state.getProperties());
+
+                ModelResourceLocation mrl = new ModelResourceLocation(signpost.getRegistryName(), stateName);
+                event.getModelRegistry().putObject(mrl, signpostModel);
             }
         }
     }

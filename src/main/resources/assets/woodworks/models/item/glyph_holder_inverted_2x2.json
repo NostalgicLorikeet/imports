@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "woodworks:items/glyph_holder_inverted"
+    "layer0": "woodworks:items/glyph_holder_inverted",
+    "layer1": "woodworks:font/ascii_glyph_50"
   }
 }
