@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "woodworks:crate" },
+    "facing=south": { "model": "woodworks:crate", "y": 180 },
+    "facing=west":  { "model": "woodworks:crate", "y": 270 },
+    "facing=east":  { "model": "woodworks:crate", "y": 90 }
+  }
+}

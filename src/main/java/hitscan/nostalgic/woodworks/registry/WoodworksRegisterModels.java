@@ -2,10 +2,7 @@ package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Tags;
 import hitscan.nostalgic.woodworks.blocks.*;
-import hitscan.nostalgic.woodworks.client.render.blocks.ModelGlyphHolder;
-import hitscan.nostalgic.woodworks.client.render.blocks.ModelPodium;
-import hitscan.nostalgic.woodworks.client.render.blocks.ModelShelf;
-import hitscan.nostalgic.woodworks.client.render.blocks.ModelSignpost;
+import hitscan.nostalgic.woodworks.client.render.blocks.*;
 import hitscan.nostalgic.woodworks.client.render.items.ModelNeonGlyph;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -54,6 +51,12 @@ public class WoodworksRegisterModels {
                 WoodworksItems.TEST,
                 0,
                 new ModelResourceLocation(WoodworksItems.TEST.getRegistryName(), "inventory")
+        );
+
+        ModelLoader.setCustomModelResourceLocation(
+                WoodworksItems.CRATE_FRAMING,
+                0,
+                new ModelResourceLocation(WoodworksItems.CRATE_FRAMING.getRegistryName(), "inventory")
         );
     }
 
@@ -124,5 +127,15 @@ public class WoodworksRegisterModels {
                 event.getModelRegistry().putObject(mrl, signpostModel);
             }
         }
+
+        for (IBlockState state : WoodworksBlocks.CRATE_WOODEN.getBlockState().getValidStates()) {
+            String stateName = defaultStateMapper.getPropertyString(state.getProperties());
+
+            ModelResourceLocation mrl = new ModelResourceLocation(WoodworksBlocks.CRATE_WOODEN.getRegistryName(), stateName);
+            event.getModelRegistry().putObject(mrl, new ModelCrate(event.getModelRegistry().getObject(mrl)));
+        }
+
+        ModelResourceLocation crateMrl = new ModelResourceLocation(WoodworksBlocks.CRATE_WOODEN.getRegistryName(), "inventory");
+        event.getModelRegistry().putObject(crateMrl, new ModelCrate(event.getModelRegistry().getObject(crateMrl)));
     }
 }

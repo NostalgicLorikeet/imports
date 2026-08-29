@@ -85,6 +85,7 @@ public class WoodworksBlocks {
     public static final BlockSignpost SIGNPOST_WOOD = new BlockSignpost(Material.WOOD, "wood", "axe");
     public static final BlockSignpost SIGNPOST_STONE = new BlockSignpost(Material.ROCK, "stone", "pickaxe");
     public static final BlockSignpost SIGNPOST_METAL = new BlockSignpost(Material.IRON, "iron", "pickaxe");
+    public static final BlockCrateWooden CRATE_WOODEN = new BlockCrateWooden();
 
     @SubscribeEvent
     public static void blocks(RegistryEvent.Register<Block> event) {
@@ -101,6 +102,7 @@ public class WoodworksBlocks {
         BLOCKS.add(GLYPH_HOLDER_INVERTED_2X2);
         BLOCKS.add(GLYPH_HOLDER_4X4);
         BLOCKS.add(GLYPH_HOLDER_INVERTED_4X4);
+        BLOCKS.add(CRATE_WOODEN);
 
         SHELVES.add(SHELF_SHORT);
         SHELVES.add(SHELF_LONG);
