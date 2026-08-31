@@ -139,9 +139,4 @@ public class BlockCrateWooden extends AbstractStorageBlock {
         }
         return state;
     }
-
-    @Override
-    public int getLightOpacity(IBlockState state) {
-        return 0;
-    }
 }
