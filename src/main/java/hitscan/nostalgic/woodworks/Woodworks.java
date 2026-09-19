@@ -20,12 +20,15 @@ public class Woodworks {
      */
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        WoodworksTileEntities.registerTESRs();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new WoodworksGUIHandler());
     }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         WoodworksTileEntities.regsiterTileEntities();
+        if (event.getSide().isClient()) {
+            WoodworksClient.registerClientEvents();
+            WoodworksClient.registerTESRs();
+        }
     }
 }

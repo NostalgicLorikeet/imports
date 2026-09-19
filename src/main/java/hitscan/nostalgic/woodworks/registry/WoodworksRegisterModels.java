@@ -17,7 +17,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class WoodworksRegisterModels {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {

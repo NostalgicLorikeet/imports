@@ -16,9 +16,4 @@ public class WoodworksTileEntities {
         GameRegistry.registerTileEntity(TileEntitySignpost.class, new ResourceLocation(Tags.MOD_ID, "signpost"));
         GameRegistry.registerTileEntity(TileEntityCrateWooden.class, new ResourceLocation(Tags.MOD_ID, "crate"));
     }
-
-    public static void registerTESRs() {
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityShelf.class, new TileEntitySpecialRendererShelf());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPodium.class, new TileEntitySpecialRendererPodium());
-    }
 }

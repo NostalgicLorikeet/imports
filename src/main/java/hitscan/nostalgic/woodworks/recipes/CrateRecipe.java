@@ -23,7 +23,7 @@ public class CrateRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IR
                 isOreMatch(inv.getStackInSlot(1), "plankWood") &&
                 isOreMatch(inv.getStackInSlot(2), "plankWood");
 
-        boolean centerCobble = inv.getStackInSlot(4).getItem() == WoodworksItems.CRATE_FRAMING;
+        boolean centerCobble = isOreMatch(inv.getStackInSlot(4), "craftingToolSaw");
 
         boolean row3 = isOreMatch(inv.getStackInSlot(6), "plankWood") &&
                 isOreMatch(inv.getStackInSlot(7), "plankWood") &&

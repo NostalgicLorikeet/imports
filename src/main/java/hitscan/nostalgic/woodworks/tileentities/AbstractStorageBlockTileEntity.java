@@ -37,6 +37,14 @@ public abstract class AbstractStorageBlockTileEntity extends TileEntity {
         return 64;
     }
 
+    public boolean isItemValidForTileEntity(int slot, ItemStack stack) {
+        return !(stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null) ||
+                stack.getItem() instanceof IInventory ||
+                stack.getItem() instanceof ItemStorageBlock ||
+                stack.getItem() instanceof ItemShulkerBox
+        );
+    }
+
     ItemStackHandler createItemStackHandler() {
         return new ItemStackHandler(stackCount()) {
             @Override
@@ -51,11 +59,7 @@ public abstract class AbstractStorageBlockTileEntity extends TileEntity {
 
             @Override
             public boolean isItemValid(int slot, ItemStack stack) {
-                return !(stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null) ||
-                        stack.getItem() instanceof IInventory ||
-                        stack.getItem() instanceof ItemStorageBlock ||
-                        stack.getItem() instanceof ItemShulkerBox
-                );
+                return isItemValidForTileEntity(slot, stack);
             }
 
             @Nonnull

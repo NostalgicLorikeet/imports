@@ -38,7 +38,7 @@ public class BlockCrateWooden extends AbstractStorageBlock {
         this.setRegistryName("crate");
         this.setTranslationKey("crate");
         this.setHarvestLevel("axe", 0);
-        this.setHardness(2.0F);
+        this.setHardness(0.7F);
         this.setSoundType(SoundType.WOOD);
         this.setDefaultState(this.getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
