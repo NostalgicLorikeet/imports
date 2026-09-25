@@ -59,7 +59,7 @@ public class ModelCrate implements IBakedModel {
         if (isStack) planks = planksInventory;
 
         for (BakedQuad quad : defaultModel.getQuads(state, side, rand)) {
-            int select = 0;
+            int select = -1;
 
             for (int i = 0; i < 6; i++) {
                 if (quad.getSprite() == placeholderPlanks[i]) {
@@ -68,7 +68,7 @@ public class ModelCrate implements IBakedModel {
             }
 
             //i dont understand why this works
-            if (planks[select] != null) {
+            if (select != -1 && planks[select] != null) {
                 if (!planks[select].isEmpty()) {
                     quads.add(new BakedQuadRetextured(quad, Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes()
                             .getTexture(ForgeRegistries.BLOCKS.getValue(Block.getBlockFromItem(planks[select].getItem()).getRegistryName()).getStateFromMeta(planks[select].getItemDamage()))
