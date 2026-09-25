@@ -7,11 +7,11 @@ import net.minecraft.nbt.NBTTagCompound;
 public class TileEntityCrateWooden extends AbstractStorageBlockTileEntity {
     ItemStack[] planks = new ItemStack[] {
         new ItemStack(Blocks.PLANKS),
-                new ItemStack(Blocks.PLANKS),
-                new ItemStack(Blocks.PLANKS),
-                new ItemStack(Blocks.PLANKS),
-                new ItemStack(Blocks.PLANKS),
-                new ItemStack(Blocks.PLANKS)
+        new ItemStack(Blocks.PLANKS),
+        new ItemStack(Blocks.PLANKS),
+        new ItemStack(Blocks.PLANKS),
+        new ItemStack(Blocks.PLANKS),
+        new ItemStack(Blocks.PLANKS)
     };
 
     @Override

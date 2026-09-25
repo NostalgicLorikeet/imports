@@ -10,11 +10,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 
 public class TileEntitySpecialRendererPodium  extends TileEntitySpecialRenderer<TileEntityPodium> {
-    private static final RenderItem RENDER_ITEM = Minecraft.getMinecraft().getRenderItem();
-
-    @Override
+@Override
     public void render(TileEntityPodium podium, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (!podium.stack.isEmpty()) {
+            RenderItem RENDER_ITEM = Minecraft.getMinecraft().getRenderItem();
+
             boolean isBlock = RENDER_ITEM.getItemModelWithOverrides(podium.stack, podium.getWorld(), null).isGui3d();
 
             GlStateManager.pushMatrix();

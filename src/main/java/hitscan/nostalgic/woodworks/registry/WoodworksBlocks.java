@@ -19,7 +19,6 @@ public class WoodworksBlocks {
     static ArrayList<BlockPodium> PODIUMS = new ArrayList<>();
     static ArrayList<BlockGlyphHolder> GLYPH_HOLDERS = new ArrayList<>();
     static ArrayList<BlockGlyphDummy> GLYPH_HOLDER_DUMMIES = new ArrayList<>();
-    static ArrayList<BlockSignpost> SIGNPOSTS = new ArrayList<>();
 
     public static final BlockShelf SHELF_SHORT = new BlockShelf(
             "short_shelf",
@@ -82,9 +81,6 @@ public class WoodworksBlocks {
     public static final BlockGlyphDummy GLYPH_1X1 = new BlockGlyphDummy("glyph_dummy_1x1");
     public static final BlockGlyphDummy GLYPH_2X2 = new BlockGlyphDummy("glyph_dummy_2x2");
     public static final BlockGlyphDummy GLYPH_4X4 = new BlockGlyphDummy("glyph_dummy_4x4");
-    public static final BlockSignpost SIGNPOST_WOOD = new BlockSignpost(Material.WOOD, "wood", "axe");
-    public static final BlockSignpost SIGNPOST_STONE = new BlockSignpost(Material.ROCK, "stone", "pickaxe");
-    public static final BlockSignpost SIGNPOST_METAL = new BlockSignpost(Material.IRON, "iron", "pickaxe");
     public static final BlockCrateWooden CRATE_WOODEN = new BlockCrateWooden();
 
     @SubscribeEvent
@@ -120,10 +116,6 @@ public class WoodworksBlocks {
         GLYPH_HOLDERS.add(GLYPH_HOLDER_4X4);
         GLYPH_HOLDERS.add(GLYPH_HOLDER_INVERTED_4X4);
 
-        SIGNPOSTS.add(SIGNPOST_WOOD);
-        SIGNPOSTS.add(SIGNPOST_STONE);
-        SIGNPOSTS.add(SIGNPOST_METAL);
-
         for (Block block : BLOCKS) {
             block.setCreativeTab(Woodworks.CREATIVE_TAB);
             event.getRegistry().register(block);
@@ -132,10 +124,6 @@ public class WoodworksBlocks {
         event.getRegistry().register(GLYPH_1X1);
         event.getRegistry().register(GLYPH_2X2);
         event.getRegistry().register(GLYPH_4X4);
-
-        for (BlockSignpost signpost : SIGNPOSTS) {
-            event.getRegistry().register(signpost);
-        }
 
         GLYPH_HOLDER_DUMMIES.add(GLYPH_1X1);
         GLYPH_HOLDER_DUMMIES.add(GLYPH_2X2);

@@ -10,11 +10,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 
 public class TileEntitySpecialRendererShelf extends TileEntitySpecialRenderer<TileEntityShelf> {
-    private static final RenderItem RENDER_ITEM = Minecraft.getMinecraft().getRenderItem();
-
     @Override
     public void render(TileEntityShelf shelf, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (shelf.canPlaceItemStacksIn() && shelf.rotation != null) {
+            RenderItem RENDER_ITEM = Minecraft.getMinecraft().getRenderItem();
+
             double distanceSq = (x * x) + (y * y) + (z * z);
             double drawDistance = (Minecraft.getMinecraft().gameSettings.renderDistanceChunks * 1.0);
             double drawDistanceSq = drawDistance * drawDistance;

@@ -13,7 +13,6 @@ public class WoodworksTileEntities {
         GameRegistry.registerTileEntity(TileEntityShelf.class, new ResourceLocation(Tags.MOD_ID, "shelf"));
         GameRegistry.registerTileEntity(TileEntityPodium.class, new ResourceLocation(Tags.MOD_ID, "podium"));
         GameRegistry.registerTileEntity(TileEntityGlyphHolder.class, new ResourceLocation(Tags.MOD_ID, "glyph_holder"));
-        GameRegistry.registerTileEntity(TileEntitySignpost.class, new ResourceLocation(Tags.MOD_ID, "signpost"));
         GameRegistry.registerTileEntity(TileEntityCrateWooden.class, new ResourceLocation(Tags.MOD_ID, "crate"));
     }
 }

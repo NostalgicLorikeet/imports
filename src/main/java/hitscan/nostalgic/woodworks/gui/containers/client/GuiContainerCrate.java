@@ -10,8 +10,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.items.IItemHandler;
 
 public class GuiContainerCrate extends GuiContainer {
-    public static final ResourceLocation CHEST_GUI = new ResourceLocation(Tags.MOD_ID, "textures/gui/crate.png");
-    public static final TextComponentTranslation CHEST_NAME = new TextComponentTranslation("tile.crate.name");
+    public static final ResourceLocation CRATE_GUI = new ResourceLocation(Tags.MOD_ID, "textures/gui/crate.png");
+    public static final TextComponentTranslation CRATE_NAME = new TextComponentTranslation("tile.crate.name");
 
     public GuiContainerCrate (EntityPlayer player, IItemHandler handler) {
         super(new ContainerCrate(player, handler));
@@ -27,9 +27,12 @@ public class GuiContainerCrate extends GuiContainer {
         GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         GlStateManager.disableLighting();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.fontRenderer.drawString(CHEST_NAME.getFormattedText(),
+        this.fontRenderer.drawString(new TextComponentTranslation("container.inventory").getFormattedText(),
+                (this.width - this.xSize) / 2 + 7, (this.height - this.ySize) / 2 + 38,
+                0xFFFFFF);
+        this.fontRenderer.drawString(CRATE_NAME.getFormattedText(),
                 (this.width - this.xSize) / 2 + 7, (this.height - this.ySize) / 2 + 6,
-                0x404040);
+                0xFFFFFF);
         GlStateManager.enableLighting();
         GlStateManager.popMatrix();
 
@@ -40,7 +43,7 @@ public class GuiContainerCrate extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.getTextureManager().bindTexture(CHEST_GUI);
+        this.mc.getTextureManager().bindTexture(CRATE_GUI);
 
         int guiLeft = (this.width - this.xSize) / 2;
         int guiTop = (this.height - this.ySize) / 2;

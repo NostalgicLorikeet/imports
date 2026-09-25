@@ -42,7 +42,7 @@ public class CrateRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IR
         int[] stackIds = OreDictionary.getOreIDs(stack);
 
         for (int id : stackIds) {
-            if (id == targetId && stack.getItem() instanceof ItemBlock) {
+            if (id == targetId && (stack.getItem() instanceof ItemBlock || oreName.equals("craftingToolSaw"))) {
                 return true;
             }
         }

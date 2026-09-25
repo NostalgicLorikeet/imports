@@ -30,9 +30,7 @@ public class WoodworksItems {
     public static final Item GLYPH_HOLDER_4X4 = new ItemBlock(WoodworksBlocks.GLYPH_HOLDER_4X4);
     public static final Item GLYPH_HOLDER_INVERTED_4X4 = new ItemBlock(WoodworksBlocks.GLYPH_HOLDER_INVERTED_4X4);
     public static final Item NEON_GLYPH = new ItemNeonGlyph();
-    public static final Item TEST = new ItemGlub();
     public static final Item CRATE_WOODEN = new ItemCrate(WoodworksBlocks.CRATE_WOODEN);
-    public static final Item CRATE_FRAMING = new Item().setTranslationKey("crate_framing").setRegistryName("crate_framing");
 
     @SubscribeEvent
     public static void blocks(RegistryEvent.Register<Item> event) {
@@ -51,9 +49,7 @@ public class WoodworksItems {
         ITEMS.add(GLYPH_HOLDER_INVERTED_2X2);
         ITEMS.add(GLYPH_HOLDER_INVERTED_4X4);
         ITEMS.add(NEON_GLYPH);
-        ITEMS.add(TEST);
         ITEMS.add(CRATE_WOODEN);
-        ITEMS.add(CRATE_FRAMING);
 
         for (Item item : ITEMS) {
             item.setCreativeTab(Woodworks.CREATIVE_TAB);

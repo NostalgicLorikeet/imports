@@ -1,9 +1,12 @@
 package hitscan.nostalgic.woodworks.gui.containers.server;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -22,13 +25,13 @@ public class ContainerCrate extends Container {
         {
             for (int j1 = 0; j1 < 9; ++j1)
             {
-                this.addSlotToContainer(new Slot(player.inventory, j1 + l * 9 + 9, 8 + j1 * 18, 48 + l * 18));
+                this.addSlotToContainer(new Slot(player.inventory, j1 + l * 9 + 9, 8 + j1 * 18, 49 + l * 18));
             }
         }
 
         for (int i1 = 0; i1 < 9; ++i1)
         {
-            this.addSlotToContainer(new Slot(player.inventory, i1, 8 + i1 * 18, 106));
+            this.addSlotToContainer(new Slot(player.inventory, i1, 8 + i1 * 18, 107));
         }
     }
 
@@ -63,5 +66,14 @@ public class ContainerCrate extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return true;
+    }
+
+    @Override
+    public void onContainerClosed(EntityPlayer playerIn) {
+        super.onContainerClosed(playerIn);
+        if (!playerIn.world.isRemote) {
+            BlockPos pos = playerIn.getPosition();
+            playerIn.world.playSound(null, pos, SoundEvents.ENTITY_SHULKER_CLOSE, SoundCategory.BLOCKS, 0.5F, 1.0F);
+        }
     }
 }

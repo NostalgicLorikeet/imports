@@ -1,6 +1,5 @@
 package hitscan.nostalgic.woodworks.registry;
 
-import hitscan.nostalgic.woodworks.Tags;
 import hitscan.nostalgic.woodworks.blocks.*;
 import hitscan.nostalgic.woodworks.client.render.blocks.*;
 import hitscan.nostalgic.woodworks.client.render.items.ModelNeonGlyph;
@@ -14,7 +13,6 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class WoodworksRegisterModels {
@@ -45,18 +43,6 @@ public class WoodworksRegisterModels {
                     new ModelResourceLocation(WoodworksItems.NEON_GLYPH.getRegistryName(), "inventory")
             );
         }
-
-        ModelLoader.setCustomModelResourceLocation(
-                WoodworksItems.TEST,
-                0,
-                new ModelResourceLocation(WoodworksItems.TEST.getRegistryName(), "inventory")
-        );
-
-        ModelLoader.setCustomModelResourceLocation(
-                WoodworksItems.CRATE_FRAMING,
-                0,
-                new ModelResourceLocation(WoodworksItems.CRATE_FRAMING.getRegistryName(), "inventory")
-        );
     }
 
     @SubscribeEvent
@@ -113,17 +99,6 @@ public class WoodworksRegisterModels {
                 if (glyphDummy == WoodworksBlocks.GLYPH_1X1) ModelGlyphHolder.GLYPH_HOLDER_1x1_MODELS.put(state.getValue(BlockGlyphDummy.FACING), event.getModelRegistry().getObject(mrl));
                 if (glyphDummy == WoodworksBlocks.GLYPH_2X2) ModelGlyphHolder.GLYPH_HOLDER_2x2_MODELS.put(state.getValue(BlockGlyphDummy.FACING), event.getModelRegistry().getObject(mrl));
                 if (glyphDummy == WoodworksBlocks.GLYPH_4X4) ModelGlyphHolder.GLYPH_HOLDER_4x4_MODELS.put(state.getValue(BlockGlyphDummy.FACING), event.getModelRegistry().getObject(mrl));
-            }
-        }
-
-        IBakedModel signpostModel =  new ModelSignpost();
-
-        for (BlockSignpost signpost : WoodworksBlocks.SIGNPOSTS) {
-            for (IBlockState state : signpost.getBlockState().getValidStates()) {
-                String stateName = defaultStateMapper.getPropertyString(state.getProperties());
-
-                ModelResourceLocation mrl = new ModelResourceLocation(signpost.getRegistryName(), stateName);
-                event.getModelRegistry().putObject(mrl, signpostModel);
             }
         }
 
