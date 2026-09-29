@@ -1,8 +1,13 @@
 package hitscan.nostalgic.woodworks.registry;
 
+import hitscan.nostalgic.woodworks.Tags;
 import hitscan.nostalgic.woodworks.blocks.*;
-import hitscan.nostalgic.woodworks.client.render.blocks.*;
+import hitscan.nostalgic.woodworks.client.render.blocks.ModelCrate;
+import hitscan.nostalgic.woodworks.client.render.blocks.ModelGlyphHolder;
+import hitscan.nostalgic.woodworks.client.render.blocks.ModelPodium;
+import hitscan.nostalgic.woodworks.client.render.blocks.ModelShelf;
 import hitscan.nostalgic.woodworks.client.render.items.ModelNeonGlyph;
+import hitscan.nostalgic.woodworks.statues.EnumStatueType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -10,6 +15,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -41,6 +47,14 @@ public class WoodworksRegisterModels {
                     WoodworksItems.NEON_GLYPH,
                     i,
                     new ModelResourceLocation(WoodworksItems.NEON_GLYPH.getRegistryName(), "inventory")
+            );
+        }
+
+        for (EnumStatueType type : EnumStatueType.values()) {
+            ModelLoader.setCustomModelResourceLocation(
+                    WoodworksItems.STATUE,
+                    type.getStatueMeta(),
+                    new ModelResourceLocation(new ResourceLocation(Tags.MOD_ID, type.getStatueName() + "_statue"), "inventory")
             );
         }
     }

@@ -38,7 +38,16 @@ item.dyed_gas_tube_black.name=Black Dyed Gas Tube
 item.glyph_template.name=Glyph Template
 item.neon_glyph.name=Neon Glyph
 item.crate_framing.name=Crate Framing
-
 item.glyph_template.tooltip.blank=Blank
+item.straw_statue.name=Straw Statue
+item.stone_statue.name=Stone Statue
+item.doll_statue.name=Doll
 
-itemGroup.woodworks=Woodworks
+entity.straw_statue.name=Straw Statue
+entity.stone_statue.name=Stone Statue
+entity.doll_statue.name=Doll
+
+itemGroup.woodworks.woodworks=Woodworks
+itemGroup.woodworks.crates=Crates
+itemGroup.woodworks.shelves=Shelves
+itemGroup.woodworks.glyphs=Glyphs

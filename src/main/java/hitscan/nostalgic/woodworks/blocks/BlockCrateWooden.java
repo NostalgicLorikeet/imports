@@ -1,6 +1,7 @@
 package hitscan.nostalgic.woodworks.blocks;
 
 import hitscan.nostalgic.woodworks.Tags;
+import hitscan.nostalgic.woodworks.WoodworksCreativeTabs;
 import hitscan.nostalgic.woodworks.gui.WoodworksGUIs;
 import hitscan.nostalgic.woodworks.properties.UnlistedPropertyItemStackArray;
 import hitscan.nostalgic.woodworks.tileentities.AbstractStorageBlockTileEntity;
@@ -9,6 +10,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,6 +29,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -142,4 +146,26 @@ public class BlockCrateWooden extends AbstractStorageBlock {
         }
         return state;
     }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        return true;
+    }
+
+    @Override
+    public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return false;
+    }
+
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing side) {
+        return BlockFaceShape.UNDEFINED;
+    }
 }
+

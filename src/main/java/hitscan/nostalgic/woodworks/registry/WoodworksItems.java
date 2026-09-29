@@ -2,6 +2,7 @@ package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Woodworks;
 import hitscan.nostalgic.woodworks.Tags;
+import hitscan.nostalgic.woodworks.WoodworksCreativeTabs;
 import hitscan.nostalgic.woodworks.items.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -31,6 +32,7 @@ public class WoodworksItems {
     public static final Item GLYPH_HOLDER_INVERTED_4X4 = new ItemBlock(WoodworksBlocks.GLYPH_HOLDER_INVERTED_4X4);
     public static final Item NEON_GLYPH = new ItemNeonGlyph();
     public static final Item CRATE_WOODEN = new ItemCrate(WoodworksBlocks.CRATE_WOODEN);
+    public static final Item STATUE = new ItemStatue();
 
     @SubscribeEvent
     public static void blocks(RegistryEvent.Register<Item> event) {
@@ -50,9 +52,10 @@ public class WoodworksItems {
         ITEMS.add(GLYPH_HOLDER_INVERTED_4X4);
         ITEMS.add(NEON_GLYPH);
         ITEMS.add(CRATE_WOODEN);
+        ITEMS.add(STATUE);
 
         for (Item item : ITEMS) {
-            item.setCreativeTab(Woodworks.CREATIVE_TAB);
+            item.setCreativeTab(WoodworksCreativeTabs.WOODWORKS_TAB);
             if (item instanceof ItemBlock) {
                 ItemBlock itemBlock = (ItemBlock) item;
                 item.setRegistryName(itemBlock.getBlock().getRegistryName());

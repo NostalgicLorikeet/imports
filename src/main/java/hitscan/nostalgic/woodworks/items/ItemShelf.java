@@ -22,6 +22,7 @@ import java.util.List;
 
 public class ItemShelf extends ItemBlock {
     public static final HashMap<String, String> TOOL_TIP_TYPE_CACHE = new HashMap<>();
+    public static final int CREATIVE_TAB_SHELF_COUNT = 0;
 
     public ItemShelf(Block block) {
         super(block);
@@ -51,7 +52,10 @@ public class ItemShelf extends ItemBlock {
                 if (!stack.getItem().getRegistryName().getNamespace().equals("minecraft")) stacks.add(stack);
             }
 
+            int count = 0;
+
             for (ItemStack woodStack : stacks) {
+                if (count == CREATIVE_TAB_SHELF_COUNT) break;
                 if (woodStack.getItem() instanceof ItemBlock) {
                     ItemStack stack = new ItemStack(this.getBlock());
                     NBTTagCompound tag = new NBTTagCompound();
@@ -61,6 +65,7 @@ public class ItemShelf extends ItemBlock {
                     tag.setTag("Texture", texture);
                     stack.setTagCompound(tag);
                     items.add(stack);
+                    count++;
                 }
             }
         }

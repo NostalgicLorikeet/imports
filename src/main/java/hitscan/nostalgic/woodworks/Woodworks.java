@@ -2,8 +2,11 @@ package hitscan.nostalgic.woodworks;
 
 import hitscan.nostalgic.woodworks.gui.WoodworksGUIHandler;
 import hitscan.nostalgic.woodworks.proxy.CommonProxy;
+import hitscan.nostalgic.woodworks.registry.WoodworksBlocks;
+import hitscan.nostalgic.woodworks.registry.WoodworksItems;
 import hitscan.nostalgic.woodworks.registry.WoodworksTileEntities;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -12,8 +15,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION)
 public class Woodworks {
-    public static final CreativeTabs CREATIVE_TAB = new WoodworksCreativeTab();
-
     @SidedProxy(clientSide = "hitscan.nostalgic.woodworks.proxy.ClientProxy", serverSide = "hitscan.nostalgic.woodworks.proxy.CommonProxy")
     public static CommonProxy PROXY;
     /**

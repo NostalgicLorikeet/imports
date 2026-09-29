@@ -1,11 +1,8 @@
 package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Tags;
-import hitscan.nostalgic.woodworks.client.render.tileentities.TileEntitySpecialRendererPodium;
-import hitscan.nostalgic.woodworks.client.render.tileentities.TileEntitySpecialRendererShelf;
 import hitscan.nostalgic.woodworks.tileentities.*;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class WoodworksTileEntities {

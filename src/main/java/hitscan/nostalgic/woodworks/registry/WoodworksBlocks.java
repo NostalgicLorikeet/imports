@@ -2,7 +2,10 @@ package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Woodworks;
 import hitscan.nostalgic.woodworks.Tags;
+import hitscan.nostalgic.woodworks.WoodworksCreativeTabs;
 import hitscan.nostalgic.woodworks.blocks.*;
+import hitscan.nostalgic.woodworks.items.ItemCrate;
+import hitscan.nostalgic.woodworks.items.ItemShelf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -117,7 +120,7 @@ public class WoodworksBlocks {
         GLYPH_HOLDERS.add(GLYPH_HOLDER_INVERTED_4X4);
 
         for (Block block : BLOCKS) {
-            block.setCreativeTab(Woodworks.CREATIVE_TAB);
+            block.setCreativeTab(WoodworksCreativeTabs.WOODWORKS_TAB);
             event.getRegistry().register(block);
         }
 

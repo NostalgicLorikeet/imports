@@ -1,5 +1,6 @@
 package hitscan.nostalgic.woodworks.blocks;
 
+import hitscan.nostalgic.woodworks.WoodworksCreativeTabs;
 import hitscan.nostalgic.woodworks.properties.UnlistedPropertyString;
 import hitscan.nostalgic.woodworks.registry.WoodworksBlocks;
 import hitscan.nostalgic.woodworks.tileentities.TileEntityShelf;
