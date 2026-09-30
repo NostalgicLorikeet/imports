@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ItemShelf extends ItemBlock {
     public static final HashMap<String, String> TOOL_TIP_TYPE_CACHE = new HashMap<>();
-    public static final int CREATIVE_TAB_SHELF_COUNT = 0;
+    public static final int CREATIVE_TAB_SHELF_COUNT = 16;
 
     public ItemShelf(Block block) {
         super(block);

@@ -3,6 +3,7 @@ package hitscan.nostalgic.woodworks.client.render.entities.render;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import hitscan.nostalgic.woodworks.Tags;
+import hitscan.nostalgic.woodworks.client.render.WoodworksSkinManager;
 import hitscan.nostalgic.woodworks.client.render.entities.layers.LayerStatueArmor;
 import hitscan.nostalgic.woodworks.client.render.entities.model.ModelDoll;
 import hitscan.nostalgic.woodworks.client.render.entities.model.ModelStatue;
@@ -12,7 +13,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.util.ResourceLocation;
@@ -31,9 +31,6 @@ public class RenderStatue extends RenderLivingBase<EntityStrawStatue> {
     public static final ResourceLocation STONE_STEVE_SKIN = new ResourceLocation(Tags.MOD_ID, "textures/entity/stone_steve.png");
     public static final ResourceLocation STONE_ALEX_SKIN = new ResourceLocation(Tags.MOD_ID, "textures/entity/stone_alex.png");
 
-    private static final HashMap<UUID, ResourceLocation> UUID_TO_SKIN_LIST = new HashMap<>();
-    private static final HashMap<UUID, Boolean> SKIN_USE_SLIM = new HashMap<>();
-
     public RenderStatue(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelStatue(0.0F, false), 0.5F);
         this.addLayer(new LayerStatueArmor(this));
@@ -45,7 +42,7 @@ public class RenderStatue extends RenderLivingBase<EntityStrawStatue> {
     @Override
     public void doRender(EntityStrawStatue entity, double x, double y, double z, float entityYaw, float partialTicks) {
         UUID uuid = entity.getPlayerUUID() != null ? entity.getPlayerUUID() : entity.getUniqueID();
-        boolean isSlim = SKIN_USE_SLIM.getOrDefault(uuid, (uuid.hashCode() & 1) == 1);
+        boolean isSlim = WoodworksSkinManager.SKIN_USE_SLIM.getOrDefault(uuid, (uuid.hashCode() & 1) == 1);
         this.mainModel = (entity instanceof EntityDollStatue) ? (isSlim ? ALEX_DOLL : STEVE_DOLL) : (isSlim ? ALEX : STEVE);
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
@@ -67,33 +64,10 @@ public class RenderStatue extends RenderLivingBase<EntityStrawStatue> {
         UUID uuid = entity.getPlayerUUID();
 
         if (uuid != null) {
-            if (!UUID_TO_SKIN_LIST.containsKey(uuid)) {
-                UUID_TO_SKIN_LIST.put(uuid, DefaultPlayerSkin.getDefaultSkin(uuid));
-                SKIN_USE_SLIM.put(uuid, (uuid.hashCode() & 1) == 1);
-
-                Minecraft.getMinecraft().addScheduledTask(() -> {
-                    try {
-                        GameProfile profile = new GameProfile(uuid, null);
-                        Minecraft.getMinecraft().getSessionService().fillProfileProperties(profile, true);
-
-                        Minecraft.getMinecraft().getSkinManager().loadProfileTextures(profile, (typeIn, location, profileTexture) -> {
-                            if (typeIn == MinecraftProfileTexture.Type.SKIN) {
-                                UUID_TO_SKIN_LIST.put(uuid, location);
-                                if (profileTexture.getMetadata("model") != null) {
-                                    SKIN_USE_SLIM.put(uuid, profileTexture.getMetadata("model").equals("slim"));
-                                } else {
-                                    SKIN_USE_SLIM.put(uuid, false);
-                                }
-                            }
-                        }, true);
-                    } catch (Exception ignored) {}
-                });
-            }
-
-            return UUID_TO_SKIN_LIST.get(uuid);
+            return WoodworksSkinManager.getSkinLocation(uuid);
         }
 
-        SKIN_USE_SLIM.put(entity.getUniqueID(), (entity.getUniqueID().hashCode() & 1) == 1);
+        WoodworksSkinManager.SKIN_USE_SLIM.put(entity.getUniqueID(), (entity.getUniqueID().hashCode() & 1) == 1);
         //return DefaultPlayerSkin.getDefaultSkin(entity.getUniqueID());
         if (entity.getStatueType().isStraw()) {
             return (entity.getUniqueID().hashCode() & 1) == 1 ? STRAW_ALEX_SKIN : STRAW_STEVE_SKIN;
