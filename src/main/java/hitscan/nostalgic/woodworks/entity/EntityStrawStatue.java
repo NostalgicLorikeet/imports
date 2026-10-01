@@ -1,6 +1,7 @@
 package hitscan.nostalgic.woodworks.entity;
 
 import com.google.common.base.Optional;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import hitscan.nostalgic.woodworks.registry.WoodworksItems;
 import hitscan.nostalgic.woodworks.statues.EnumStatueType;
 import net.minecraft.block.Block;
@@ -32,13 +33,14 @@ import java.util.Map;
 import java.util.UUID;
 
 public class EntityStrawStatue extends EntityLivingBase {
-    private static final DataParameter<Optional<UUID>> SKIN_UUID = EntityDataManager.createKey(EntityStrawStatue.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+    protected static final DataParameter<Optional<UUID>> SKIN_UUID = EntityDataManager.createKey(EntityStrawStatue.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+    protected static final DataParameter<Float> ROTATION_FULL_BODY = EntityDataManager.createKey(EntityStrawStatue.class, DataSerializers.FLOAT);
+    protected static final DataParameter<Float> BODY_TRANSLATION = EntityDataManager.createKey(EntityStrawStatue.class, DataSerializers.FLOAT);
+    protected static final DataParameter<Boolean> LOCK_LEGS_TO_BODY = EntityDataManager.createKey(EntityStrawStatue.class, DataSerializers.BOOLEAN);
+    protected static final Map<Part, Map<Axis, DataParameter<Float>>> ROTATION_DATA_PARAMETER_MAP = new EnumMap<>(Part.class);
 
-    private static final DataParameter<Float> ROTATION_FULL_BODY = EntityDataManager.createKey(EntityStrawStatue.class, DataSerializers.FLOAT);
-    private static final Map<Part, Map<Axis, DataParameter<Float>>> ROTATION_DATA_PARAMETER_MAP = new EnumMap<>(Part.class);
-
-    private final NonNullList<ItemStack> armor = NonNullList.withSize(4, ItemStack.EMPTY);
-    private final NonNullList<ItemStack> hands = NonNullList.withSize(2, ItemStack.EMPTY);
+    protected final NonNullList<ItemStack> armor = NonNullList.withSize(4, ItemStack.EMPTY);
+    protected final NonNullList<ItemStack> hands = NonNullList.withSize(2, ItemStack.EMPTY);
 
     public EntityStrawStatue(World worldIn) {
         super(worldIn);
@@ -48,7 +50,6 @@ public class EntityStrawStatue extends EntityLivingBase {
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
-        if (this.getPlayerUUID() != null) compound.setString("PlayerUUID", this.getPlayerUUID().toString());
         compound.setFloat("RotationFullBody", this.getFullBodyRotation());
 
         NBTTagList nbttaglist = new NBTTagList();
@@ -56,8 +57,7 @@ public class EntityStrawStatue extends EntityLivingBase {
         for (ItemStack itemstack : this.armor) {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
 
-            if (!itemstack.isEmpty())
-            {
+            if (!itemstack.isEmpty()) {
                 itemstack.writeToNBT(nbttagcompound);
             }
 
@@ -71,8 +71,7 @@ public class EntityStrawStatue extends EntityLivingBase {
         for (ItemStack itemstack1 : this.hands) {
             NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 
-            if (!itemstack1.isEmpty())
-            {
+            if (!itemstack1.isEmpty()) {
                 itemstack1.writeToNBT(nbttagcompound1);
             }
 
@@ -80,10 +79,17 @@ public class EntityStrawStatue extends EntityLivingBase {
         }
 
         compound.setTag("HandItems", nbttaglist1);
+        writeStatueDataToNBT(compound, this);
+    }
+
+    public static void writeStatueDataToNBT(NBTTagCompound compound, EntityStrawStatue statue) {
+        if (statue.getPlayerUUID() != null) compound.setString("PlayerUUID", statue.getPlayerUUID().toString());
+        compound.setFloat("BodyTranslation", statue.getBodyTranslation());
+        compound.setBoolean("LegsLockedToBody", statue.areLegsLockedToBody());
 
         for (Part part : Part.values()) {
             for (Axis axis : Axis.values()) {
-                compound.setFloat(getPartAxisStorageName(part, axis), getLimbRotation(part, axis));
+                compound.setFloat(getPartAxisStorageName(part, axis), statue.getLimbRotation(part, axis));
             }
         }
     }
@@ -91,9 +97,7 @@ public class EntityStrawStatue extends EntityLivingBase {
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
-        if (compound.hasKey("PlayerUUID")) {
-            this.setPlayerUUID(compound.getString("PlayerUUID"));
-        }
+
         if (compound.hasKey("RotationFullBody")) {
             this.setFullBodyRotation(compound.getFloat("RotationFullBody"));
         }
@@ -118,10 +122,26 @@ public class EntityStrawStatue extends EntityLivingBase {
             }
         }
 
+        readStatueDataFromNBT(compound, this);
+    }
+
+    public static void readStatueDataFromNBT (NBTTagCompound compound, EntityStrawStatue statue) {
+        if (compound.hasKey("PlayerUUID")) {
+            statue.setPlayerUUID(compound.getString("PlayerUUID"));
+        }
+
+        if (compound.hasKey("BodyTranslation")) {
+            statue.setBodyTranslation(compound.getFloat("BodyTranslation"));
+        }
+
+        if (compound.hasKey("LegsLockedToBody")) {
+            statue.setLegsLockedToBody(compound.getBoolean("LegsLockedToBody"));
+        }
+
         for (Part part : Part.values()) {
             for (Axis axis : Axis.values()) {
                 if (compound.hasKey(getPartAxisStorageName(part, axis))) {
-                    setLimbRotation(part, axis, compound.getFloat(getPartAxisStorageName(part, axis)));
+                    statue.setLimbRotation(part, axis, compound.getFloat(getPartAxisStorageName(part, axis)));
                 }
             }
         }
@@ -144,11 +164,29 @@ public class EntityStrawStatue extends EntityLivingBase {
         this.getDataManager().set(ROTATION_FULL_BODY, rot);
     }
 
+    public float getBodyTranslation() {
+        return this.getDataManager().get(BODY_TRANSLATION);
+    }
+
+    public void setBodyTranslation(float bodyTranslation) {
+        this.getDataManager().set(BODY_TRANSLATION, bodyTranslation);
+    }
+
+    public void setLegsLockedToBody(boolean legsLockedToBody) {
+        this.dataManager.set(LOCK_LEGS_TO_BODY, legsLockedToBody);
+    }
+
+    public boolean areLegsLockedToBody() {
+        return this.dataManager.get(LOCK_LEGS_TO_BODY);
+    }
+
     @Override
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(SKIN_UUID, Optional.absent());
         this.dataManager.register(ROTATION_FULL_BODY, 0.0F);
+        this.dataManager.register(BODY_TRANSLATION, 0.0F);
+        this.dataManager.register(LOCK_LEGS_TO_BODY, false);
         for (Part part : Part.values()) {
             for (Axis axis : Axis.values()) {
                 this.dataManager.register(ROTATION_DATA_PARAMETER_MAP.get(part).get(axis), 0.0F);
@@ -159,31 +197,34 @@ public class EntityStrawStatue extends EntityLivingBase {
     @Override
     public boolean processInitialInteract(EntityPlayer player, EnumHand hand) {
         if (!world.isRemote) {
-            if (hand == EnumHand.OFF_HAND && !player.getHeldItemMainhand().isEmpty())
-                return super.processInitialInteract(player, hand);
-            ItemStack itemStack = player.getHeldItem(hand);
-            EntityEquipmentSlot slot;
-            if (itemStack.isEmpty()) {
-                slot = EntityEquipmentSlot.MAINHAND;
+            if (!player.isSneaking()) {
                 if (hand == EnumHand.OFF_HAND) return super.processInitialInteract(player, hand);
-            } else {
-                slot = hand == EnumHand.MAIN_HAND ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND;
-            }
-            if (itemStack.getItem() instanceof ItemArmor) {
-                ItemArmor itemArmor = (ItemArmor) itemStack.getItem();
+                ItemStack itemStack = player.getHeldItem(hand);
+                EntityEquipmentSlot slot = EntityEquipmentSlot.MAINHAND;
+                if (itemStack.getItem() instanceof ItemArmor) {
+                    ItemArmor itemArmor = (ItemArmor) itemStack.getItem();
 
-                slot = itemArmor.armorType;
-            }
+                    slot = itemArmor.armorType;
+                }
 
-            ItemStack itemStackOld = this.getItemStackFromSlot(slot);
-            ItemStack itemStackCopy = itemStack.copy();
-            itemStackCopy.setCount(1);
+                ItemStack itemStackOld = this.getItemStackFromSlot(slot);
+                ItemStack itemStackCopy = itemStack.copy();
+                itemStackCopy.setCount(1);
 
-            this.setItemStackToSlot(slot, itemStackCopy);
-            if (!itemStack.isEmpty()) player.getHeldItem(hand).shrink(1);
+                this.setItemStackToSlot(slot, itemStackCopy);
+                if (!itemStack.isEmpty()) player.getHeldItem(hand).shrink(1);
 
-            if (!itemStackOld.isEmpty()) {
-                player.addItemStackToInventory(itemStackOld);
+                if (!itemStackOld.isEmpty()) {
+                    if (!(itemStackOld.getItem() instanceof ItemArmor)) {
+                        player.addItemStackToInventory(itemStackOld);
+                    } else {
+                        if (itemStack.isEmpty()) {
+                            player.setHeldItem(EnumHand.MAIN_HAND, itemStackOld);
+                        } else {
+                            Block.spawnAsEntity(this.world, player.getPosition(), itemStackOld);
+                        }
+                    }
+                }
             }
         }
 
@@ -223,7 +264,7 @@ public class EntityStrawStatue extends EntityLivingBase {
             return canBeHurtByExplosion();
         }
 
-        return false;
+        return true;
     }
 
     @Override
@@ -298,7 +339,14 @@ public class EntityStrawStatue extends EntityLivingBase {
         ItemStack itemStack = new ItemStack(WoodworksItems.STATUE, 1, getStatueType().getStatueMeta());
 
         if (saveData) {
-            
+            NBTTagCompound statueData = new NBTTagCompound();
+            writeStatueDataToNBT(statueData, this);
+            if (this.hasCustomName()) {
+                NBTTagCompound displayData = new NBTTagCompound();
+                displayData.setString("Name", this.getCustomNameTag());
+                statueData.setTag("display", displayData);
+            }
+            itemStack.setTagCompound(statueData);
         }
 
         return itemStack;
@@ -397,21 +445,27 @@ public class EntityStrawStatue extends EntityLivingBase {
     }
 
     public enum Part {
-        HEAD("Head"),
-        BODY("Body"),
-        ARM_LEFT("ArmLeft"),
-        ARM_RIGHT("ArmRight"),
-        LEG_LEFT("LegLeft"),
-        LEG_RIGHT("LegRight");
+        HEAD("Head", false),
+        BODY("Body", false),
+        ARM_LEFT("ArmLeft", false),
+        ARM_RIGHT("ArmRight", false),
+        LEG_LEFT("LegLeft", true),
+        LEG_RIGHT("LegRight", true);
 
         final String name;
+        final boolean leg;
 
-        Part(String name) {
+        Part(String name, boolean leg) {
             this.name = name;
+            this.leg = leg;
         }
 
         public String getName() {
             return name;
+        }
+
+        public boolean isLeg() {
+            return leg;
         }
     }
 

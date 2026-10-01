@@ -3,9 +3,9 @@ package hitscan.nostalgic.woodworks.client.render.entities.render;
 import hitscan.nostalgic.woodworks.client.render.entities.layers.LayerStatueArmor;
 import net.minecraft.client.renderer.entity.RenderManager;
 
-public class RenderStatue extends AbstractRenderStatue {
-    public RenderStatue(RenderManager renderManagerIn) {
+public class RenderDoll extends AbstractRenderStatue {
+    public RenderDoll(RenderManager renderManagerIn) {
         super(renderManagerIn);
-        this.addLayer(new LayerStatueArmor(this, false));
+        this.addLayer(new LayerStatueArmor(this, true));
     }
 }

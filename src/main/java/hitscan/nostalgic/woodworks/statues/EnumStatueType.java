@@ -8,9 +8,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public enum EnumStatueType {
-    STRAW("straw", 0, SoundEvents.BLOCK_CLOTH_PLACE, true),
+    STRAW("straw", 0, SoundEvents.BLOCK_GRASS_PLACE, true),
     STONE("stone", 1, SoundEvents.BLOCK_STONE_PLACE),
-    DOLL("doll", 2, SoundEvents.BLOCK_CLOTH_PLACE, true);
+    DOLL("doll", 2, SoundEvents.BLOCK_GRASS_PLACE, true);
 
     final String name;
     final int meta;

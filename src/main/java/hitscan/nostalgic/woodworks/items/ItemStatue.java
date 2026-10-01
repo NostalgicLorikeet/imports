@@ -7,6 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -51,6 +52,12 @@ public class ItemStatue extends Item {
         EnumStatueType type = EnumStatueType.getStatueFromMeta(meta);
         EntityStrawStatue statue = type.get(world);
         statue.setPosition(pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F);
+        if (stack.hasTagCompound()) {
+            EntityStrawStatue.readStatueDataFromNBT(stack.getTagCompound(), statue);
+            if (stack.hasDisplayName()) {
+                statue.setCustomNameTag(stack.getDisplayName());
+            }
+        }
         world.spawnEntity(statue);
         statue.setFullBodyRotation(rotationYaw);
         world.playSound(
@@ -77,5 +84,14 @@ public class ItemStatue extends Item {
     @Override
     public String getTranslationKey(ItemStack stack) {
         return "item." + EnumStatueType.getStatueFromMeta(stack.getMetadata()).getStatueName() + "_statue";
+    }
+
+    @Override
+    public boolean hasEffect (ItemStack stack) {
+        if (stack.hasTagCompound()) {
+            NBTTagCompound tagCompound = stack.getTagCompound();
+            return tagCompound.hasKey("PlayerUUID");
+        }
+        return false;
     }
 }

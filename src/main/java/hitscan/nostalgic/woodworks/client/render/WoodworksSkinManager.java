@@ -2,6 +2,7 @@ package hitscan.nostalgic.woodworks.client.render;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import hitscan.nostalgic.woodworks.Woodworks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.util.ResourceLocation;
@@ -13,6 +14,9 @@ public class WoodworksSkinManager {
     public static final HashMap<UUID, ResourceLocation> UUID_TO_SKIN_LIST = new HashMap<>();
     public static final HashMap<UUID, Boolean> SKIN_USE_SLIM = new HashMap<>();
 
+    public static final HashMap<UUID, GameProfile> UUID_TO_GAME_PROFILE = new HashMap<>();
+    public static final HashMap<String, GameProfile> USERNAME_TO_GAME_PROFILE = new HashMap<>();
+
     public static ResourceLocation getSkinLocation(UUID uuid) {
         if (!UUID_TO_SKIN_LIST.containsKey(uuid)) {
             UUID_TO_SKIN_LIST.put(uuid, DefaultPlayerSkin.getDefaultSkin(uuid));
@@ -20,10 +24,21 @@ public class WoodworksSkinManager {
 
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 try {
-                    GameProfile profile = new GameProfile(uuid, null);
-                    Minecraft.getMinecraft().getSessionService().fillProfileProperties(profile, true);
+                    GameProfile profile;
 
-                    System.out.println("Trying to download skin from ID "+ uuid);
+                    if (UUID_TO_GAME_PROFILE.containsKey(uuid)) {
+                        profile = UUID_TO_GAME_PROFILE.get(uuid);
+                    } else {
+                        profile = new GameProfile(uuid, null);
+                        UUID_TO_GAME_PROFILE.put(uuid, profile);
+                    }
+
+                    if (profile.getName() == null) {
+                        Minecraft.getMinecraft().getSessionService().fillProfileProperties(profile, true);
+                        USERNAME_TO_GAME_PROFILE.put(profile.getName(), profile);
+                    }
+
+                    Woodworks.LOGGER.info("Trying to download skin from ID {}", uuid);
 
                     Minecraft.getMinecraft().getSkinManager().loadProfileTextures(profile, (typeIn, location, profileTexture) -> {
                         if (typeIn == MinecraftProfileTexture.Type.SKIN) {

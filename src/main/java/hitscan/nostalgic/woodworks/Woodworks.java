@@ -12,11 +12,15 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION)
 public class Woodworks {
     @SidedProxy(clientSide = "hitscan.nostalgic.woodworks.proxy.ClientProxy", serverSide = "hitscan.nostalgic.woodworks.proxy.CommonProxy")
     public static CommonProxy PROXY;
+
+    public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
     /**
      * <a href="https://cleanroommc.com/wiki/forge-mod-development/event#overview">
      *     Take a look at how many FMLStateEvents you can listen to via the @Mod.EventHandler annotation here
