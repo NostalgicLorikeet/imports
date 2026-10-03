@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TextureStitch {
+public class EventTextureStitch {
     @SubscribeEvent
     public static void textureStitch(TextureStitchEvent.Pre event) {
         if (event.getMap() == Minecraft.getMinecraft().getTextureMapBlocks()) {

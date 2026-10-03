@@ -16,10 +16,10 @@ public class ModelBipedStatueArmor extends ModelBiped {
         float addToSize = (isDoll ? 1.5F : 0F);
         float offsetY = (isDoll ? -8.0F-modelSize+addToSize-1.0F : -8.0F-modelSize+addToSize+1.0F);
         this.bipedHead = new ModelRenderer(this, 0, 0);
-        this.bipedHead.addBox(-4.0F, offsetY, -4.0F, 8, 8, 8, modelSize + addToSize + 0.5F);
+        this.bipedHead.addBox(-4.0F, offsetY-0.1F, -4.0F, 8, 8, 8, modelSize + addToSize);
         this.bipedHead.setRotationPoint(0.0F, 0.0F + this.bipedHead.rotationPointY, 0.0F);
         this.bipedHeadwear = new ModelRenderer(this, 32, 0);
-        this.bipedHeadwear.addBox(-4.0F, offsetY, -4.0F, 8, 8, 8, modelSize + 1.0F + addToSize);
+        this.bipedHeadwear.addBox(-4.0F, offsetY, -4.0F, 8, 8, 8, modelSize + 0.5F + addToSize);
         this.bipedHeadwear.setRotationPoint(0.0F, 0.0F + this.bipedHeadwear.rotationPointY, 0.0F);
 
         //ACTUAL BULLSHIT

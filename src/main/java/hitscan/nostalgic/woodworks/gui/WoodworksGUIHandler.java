@@ -1,8 +1,12 @@
 package hitscan.nostalgic.woodworks.gui;
 
+import hitscan.nostalgic.woodworks.entity.EntityStrawStatue;
 import hitscan.nostalgic.woodworks.gui.containers.client.GuiContainerCrate;
+import hitscan.nostalgic.woodworks.gui.containers.client.GuiContainerStatue;
 import hitscan.nostalgic.woodworks.gui.containers.server.ContainerCrate;
+import hitscan.nostalgic.woodworks.gui.containers.server.ContainerStatue;
 import hitscan.nostalgic.woodworks.tileentities.TileEntityCrateWooden;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -28,6 +32,12 @@ public class WoodworksGUIHandler implements IGuiHandler {
                     return null;
                 }
             }
+        } else if (ID == WoodworksGUIs.STATUE) {
+            Entity entity = world.getEntityByID(x);
+            if (entity instanceof EntityStrawStatue) {
+                EntityStrawStatue entityStrawStatue = (EntityStrawStatue) entity;
+                return new ContainerStatue(player.inventory, entityStrawStatue);
+            }
         }
         return null;
     }
@@ -46,6 +56,12 @@ public class WoodworksGUIHandler implements IGuiHandler {
                 } else {
                     return null;
                 }
+            }
+        } else if (ID == WoodworksGUIs.STATUE) {
+            Entity entity = world.getEntityByID(x);
+            if (entity instanceof EntityStrawStatue) {
+                EntityStrawStatue entityStrawStatue = (EntityStrawStatue) entity;
+                return new GuiContainerStatue(player.inventory, entityStrawStatue);
             }
         }
         return null;

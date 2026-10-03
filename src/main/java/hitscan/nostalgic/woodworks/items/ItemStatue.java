@@ -76,6 +76,7 @@ public class ItemStatue extends Item {
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.isInCreativeTab(tab)) {
             for (EnumStatueType type : EnumStatueType.values()) {
+                if (type == EnumStatueType.STONE) continue;
                 items.add(new ItemStack(this, 1, type.getStatueMeta()));
             }
         }
@@ -90,7 +91,7 @@ public class ItemStatue extends Item {
     public boolean hasEffect (ItemStack stack) {
         if (stack.hasTagCompound()) {
             NBTTagCompound tagCompound = stack.getTagCompound();
-            return tagCompound.hasKey("PlayerUUID");
+            return tagCompound.hasKey("PlayerName");
         }
         return false;
     }

@@ -1,6 +1,7 @@
 package hitscan.nostalgic.woodworks.client.render.items;
 
 import hitscan.nostalgic.woodworks.entity.EntityDollStatue;
+import hitscan.nostalgic.woodworks.entity.EntityStrawStatue;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -27,11 +28,28 @@ public class TileEntityItemStackRendererDoll extends TileEntityItemStackRenderer
             DOLL_SKINLESS.doTranslation = false;
         }
 
+        DOLL.setPlayerName("");
+        DOLL.setPlayerUUID(null);
+        DOLL.setFullBodyRotation(0);
+        DOLL.setBodyTranslation(0);
+        DOLL.setLegsLockedToBody(false);
+        DOLL_SKINLESS.setPlayerName("");
+        DOLL_SKINLESS.setPlayerUUID(null);
+        DOLL_SKINLESS.setFullBodyRotation(0);
+        DOLL_SKINLESS.setBodyTranslation(0);
+        DOLL_SKINLESS.setLegsLockedToBody(false);
+        for (EntityStrawStatue.Part part : EntityStrawStatue.Part.values()) {
+            for (EntityStrawStatue.Axis axis : EntityStrawStatue.Axis.values()) {
+                DOLL.setLimbRotation(part, axis, 0);
+                DOLL_SKINLESS.setLimbRotation(part, axis, 0);
+            }
+        }
+
         boolean renderSkinless;
 
         if (itemStackIn.hasTagCompound()) {
             NBTTagCompound ifYouSeeUsInTheClubWellBeActingRealNiceIfYouSeeUsOnTheFloorYoullBeWatchinAllNight = itemStackIn.getTagCompound();
-            renderSkinless = !ifYouSeeUsInTheClubWellBeActingRealNiceIfYouSeeUsOnTheFloorYoullBeWatchinAllNight.hasKey("PlayerUUID");
+            renderSkinless = !ifYouSeeUsInTheClubWellBeActingRealNiceIfYouSeeUsOnTheFloorYoullBeWatchinAllNight.hasKey("PlayerName");
             EntityDollStatue.readStatueDataFromNBT(ifYouSeeUsInTheClubWellBeActingRealNiceIfYouSeeUsOnTheFloorYoullBeWatchinAllNight, renderSkinless ? DOLL_SKINLESS : DOLL);
         } else {
             renderSkinless = true;

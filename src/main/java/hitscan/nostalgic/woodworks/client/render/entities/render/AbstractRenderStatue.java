@@ -7,14 +7,13 @@ import hitscan.nostalgic.woodworks.client.render.entities.model.ModelDoll;
 import hitscan.nostalgic.woodworks.client.render.entities.model.ModelStatue;
 import hitscan.nostalgic.woodworks.entity.EntityDollStatue;
 import hitscan.nostalgic.woodworks.entity.EntityStrawStatue;
+import hitscan.nostalgic.woodworks.gui.containers.client.GuiContainerStatue;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
 
 public class AbstractRenderStatue extends RenderLivingBase<EntityStrawStatue> {
     private static final ModelStatue STEVE = new ModelStatue(0.0F, false);
@@ -36,15 +35,14 @@ public class AbstractRenderStatue extends RenderLivingBase<EntityStrawStatue> {
 
     @Override
     public void doRender(EntityStrawStatue entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        UUID uuid = entity.getPlayerUUID() != null ? entity.getPlayerUUID() : entity.getUniqueID();
-        boolean isSlim = WoodworksSkinManager.SKIN_USE_SLIM.getOrDefault(uuid, (uuid.hashCode() & 1) == 1);
+        boolean isSlim = entity.getPlayerUUID() != null ? WoodworksSkinManager.SKIN_USE_SLIM.getOrDefault(entity.getPlayerUUID(), false) : (entity.getUniqueID().hashCode() & 1) == 1;
         this.mainModel = (entity instanceof EntityDollStatue) ? (isSlim ? ALEX_DOLL : STEVE_DOLL) : (isSlim ? ALEX : STEVE);
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
     @Override
     protected void preRenderCallback(EntityStrawStatue entity, float partialTickTime) {
-        GlStateManager.rotate(entity.getFullBodyRotation(), 0.0F, 1.0F, 0.0F);
+        if (entity.doRotation) GlStateManager.rotate(entity.getFullBodyRotation(), 0.0F, 1.0F, 0.0F);
         if (entity instanceof EntityDollStatue) GlStateManager.scale(0.5F, 0.5F, 0.5F);
     }
 
@@ -56,13 +54,9 @@ public class AbstractRenderStatue extends RenderLivingBase<EntityStrawStatue> {
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntityStrawStatue entity) {
-        UUID uuid = entity.getPlayerUUID();
-
-        if (uuid != null) {
-            return WoodworksSkinManager.getSkinLocation(uuid);
+        if (entity.getPlayerUUID() != null) {
+            return WoodworksSkinManager.getSkinLocation(entity.getPlayerUUID());
         }
-
-        WoodworksSkinManager.SKIN_USE_SLIM.put(entity.getUniqueID(), (entity.getUniqueID().hashCode() & 1) == 1);
         if (entity.getStatueType().isStraw()) {
             return (entity.getUniqueID().hashCode() & 1) == 1 ? STRAW_ALEX_SKIN : STRAW_STEVE_SKIN;
         } else {

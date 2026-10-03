@@ -1,4 +1,4 @@
-package hitscan.nostalgic.woodworks.events;
+package hitscan.nostalgic.woodworks.registry;
 
 import hitscan.nostalgic.woodworks.Tags;
 import hitscan.nostalgic.woodworks.recipes.CrateRecipe;
@@ -9,8 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
-public class Crafting {
-
+public class WoodworksCrafting {
     @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         CrateRecipe crateRecipe = new CrateRecipe();

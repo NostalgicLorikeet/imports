@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class AssetReloadListener implements IResourceManagerReloadListener {
+public class EventAssetReloadListener implements IResourceManagerReloadListener {
 
     @Mod.EventHandler
     @SideOnly(Side.CLIENT)

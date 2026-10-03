@@ -6,20 +6,22 @@ import hitscan.nostalgic.woodworks.Woodworks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
 import java.util.UUID;
 
+@SideOnly(Side.CLIENT)
 public class WoodworksSkinManager {
-    public static final HashMap<UUID, ResourceLocation> UUID_TO_SKIN_LIST = new HashMap<>();
+    public static final HashMap<UUID, ResourceLocation> UUID_TO_SKIN = new HashMap<>();
     public static final HashMap<UUID, Boolean> SKIN_USE_SLIM = new HashMap<>();
 
     public static final HashMap<UUID, GameProfile> UUID_TO_GAME_PROFILE = new HashMap<>();
-    public static final HashMap<String, GameProfile> USERNAME_TO_GAME_PROFILE = new HashMap<>();
 
     public static ResourceLocation getSkinLocation(UUID uuid) {
-        if (!UUID_TO_SKIN_LIST.containsKey(uuid)) {
-            UUID_TO_SKIN_LIST.put(uuid, DefaultPlayerSkin.getDefaultSkin(uuid));
+        if (!UUID_TO_SKIN.containsKey(uuid)) {
+            UUID_TO_SKIN.put(uuid, DefaultPlayerSkin.getDefaultSkin(uuid));
             SKIN_USE_SLIM.put(uuid, (uuid.hashCode() & 1) == 1);
 
             Minecraft.getMinecraft().addScheduledTask(() -> {
@@ -35,14 +37,13 @@ public class WoodworksSkinManager {
 
                     if (profile.getName() == null) {
                         Minecraft.getMinecraft().getSessionService().fillProfileProperties(profile, true);
-                        USERNAME_TO_GAME_PROFILE.put(profile.getName(), profile);
                     }
 
                     Woodworks.LOGGER.info("Trying to download skin from ID {}", uuid);
 
                     Minecraft.getMinecraft().getSkinManager().loadProfileTextures(profile, (typeIn, location, profileTexture) -> {
                         if (typeIn == MinecraftProfileTexture.Type.SKIN) {
-                            UUID_TO_SKIN_LIST.put(uuid, location);
+                            UUID_TO_SKIN.put(uuid, location);
                             if (profileTexture.getMetadata("model") != null) {
                                 SKIN_USE_SLIM.put(uuid, profileTexture.getMetadata("model").equals("slim"));
                             } else {
@@ -54,6 +55,6 @@ public class WoodworksSkinManager {
             });
         }
 
-        return UUID_TO_SKIN_LIST.get(uuid);
+        return UUID_TO_SKIN.get(uuid);
     }
 }

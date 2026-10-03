@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockShelf extends BlockHorizontal {
+    //please separate this into multiple classes oh my god
     public static final PropertyBool LEFT = PropertyBool.create("has_left");
     public static final PropertyBool RIGHT = PropertyBool.create("has_right");
     public static final IUnlistedProperty<String> ID = new UnlistedPropertyString("id");

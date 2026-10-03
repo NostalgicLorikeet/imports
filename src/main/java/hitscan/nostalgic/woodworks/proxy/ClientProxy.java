@@ -8,8 +8,8 @@ import hitscan.nostalgic.woodworks.client.render.tileentities.TileEntitySpecialR
 import hitscan.nostalgic.woodworks.entity.EntityDollStatue;
 import hitscan.nostalgic.woodworks.entity.EntityStoneStatue;
 import hitscan.nostalgic.woodworks.entity.EntityStrawStatue;
-import hitscan.nostalgic.woodworks.events.AssetReloadListener;
-import hitscan.nostalgic.woodworks.events.TextureStitch;
+import hitscan.nostalgic.woodworks.events.EventAssetReloadListener;
+import hitscan.nostalgic.woodworks.events.EventTextureStitch;
 import hitscan.nostalgic.woodworks.registry.WoodworksItems;
 import hitscan.nostalgic.woodworks.registry.WoodworksRegisterModels;
 import hitscan.nostalgic.woodworks.tileentities.TileEntityPodium;
@@ -22,9 +22,9 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit() {
         super.preInit();
-        MinecraftForge.EVENT_BUS.register(TextureStitch.class);
+        MinecraftForge.EVENT_BUS.register(EventTextureStitch.class);
         MinecraftForge.EVENT_BUS.register(WoodworksRegisterModels.class);
-        MinecraftForge.EVENT_BUS.register(AssetReloadListener.class);
+        MinecraftForge.EVENT_BUS.register(EventAssetReloadListener.class);
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityShelf.class, new TileEntitySpecialRendererShelf());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPodium.class, new TileEntitySpecialRendererPodium());
