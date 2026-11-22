@@ -1,0 +1,8 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"parent": "rubyutils:block/shelf_parts/shelf_right_long",
+	"textures": {
+		"1": "blocks/planks_oak"
+	}
+}

@@ -216,16 +216,22 @@ processResources {
 jar {
     manifest {
         def attribute_map = [:]
-        if (propertyBool('is_coremod')) {
-            attribute_map['FMLCorePlugin'] = propertyString('coremod_plugin_class_name')
-            if (propertyBool('coremod_includes_mod')) {
-                attribute_map['FMLCorePluginContainsFMLMod'] = true
-                def currentTasks = gradle.startParameter.taskNames
-                if (currentTasks[0] == 'build' || currentTasks[0] == 'prepareObfModsFolder' || currentTasks[0] == 'runObfClient') {
-                    attribute_map['ForceLoadAsMod'] = true
-                }
-            }
-        }
+        //mixins do not load if i dont do this i guess
+        attribute_map['TweakClass'] = 'org.spongepowered.asm.launch.MixinTweaker'
+        attribute_map['MixinConfigs'] = 'mixins.rubyutils.json'
+        //if (propertyBool('is_coremod')) {
+        //    attribute_map['FMLCorePlugin'] = propertyString('coremod_plugin_class_name')
+        //    if (propertyBool('coremod_includes_mod')) {
+        //        attribute_map['FMLCorePluginContainsFMLMod'] = true
+        //        def currentTasks = gradle.startParameter.taskNames
+        //        if (currentTasks[0] == 'build' || currentTasks[0] == 'prepareObfModsFolder' || currentTasks[0] == 'runObfClient') {
+        //            attribute_map['ForceLoadAsMod'] = true
+        //        }
+        //    }
+        //}
+        //same here
+        attribute_map['FMLCorePluginContainsFMLMod'] = 'true'
+        attribute_map['ForceLoadAsMod'] = 'true'
         if (propertyBool('use_access_transformer')) {
             attribute_map['FMLAT'] = propertyString('access_transformer_locations')
         }

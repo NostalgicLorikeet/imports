@@ -1,0 +1,100 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north", "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_display_chained" }
+    },
+    {
+      "when": { "facing": "south", "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_display_chained", "y": 180 }
+    },
+    {
+      "when": { "facing": "east", "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_display_chained", "y": 90 }
+    },
+    {
+      "when": { "facing": "west", "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_display_chained", "y": 270 }
+    },
+    {
+      "when": { "facing": "north", "has_left": true, "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_left_display_chained", "uvlock": true }
+    },
+    {
+      "when": { "facing": "north", "has_right": true, "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_right_display_chained", "uvlock": true }
+    },
+    {
+      "when": { "facing": "south", "has_left": true, "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_left_display_chained", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "facing": "south", "has_right": true, "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_right_display_chained", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "facing": "east", "has_left": true, "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_left_display_chained", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "facing": "east", "has_right": true, "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_right_display_chained", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "facing": "west", "has_left": true, "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_left_display_chained", "y": 270, "uvlock": true }
+    },
+    {
+      "when": { "facing": "west", "has_right": true, "hanging": "false" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_right_display_chained", "y": 270, "uvlock": true }
+    },
+    {
+      "when": { "facing": "north", "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_display_hanging" }
+    },
+    {
+      "when": { "facing": "south", "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_display_hanging", "y": 180 }
+    },
+    {
+      "when": { "facing": "east", "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_display_hanging", "y": 90 }
+    },
+    {
+      "when": { "facing": "west", "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_display_hanging", "y": 270 }
+    },
+    {
+      "when": { "facing": "north", "has_left": true, "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_left_display_hanging", "uvlock": true }
+    },
+    {
+      "when": { "facing": "north", "has_right": true, "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_right_display_hanging", "uvlock": true }
+    },
+    {
+      "when": { "facing": "south", "has_left": true, "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_left_display_hanging", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "facing": "south", "has_right": true, "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_right_display_hanging", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "facing": "east", "has_left": true, "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_left_display_hanging", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "facing": "east", "has_right": true, "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_right_display_hanging", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "facing": "west", "has_left": true, "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_left_display_hanging", "y": 270, "uvlock": true }
+    },
+    {
+      "when": { "facing": "west", "has_right": true, "hanging": "true" },
+      "apply": { "model": "rubyutils:shelf_parts/shelf_right_display_hanging", "y": 270, "uvlock": true }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+tile.short_shelf.name=Short Shelf
+tile.long_shelf.name=Shelf
+tile.display_shelf.name=Display Shelf
+tile.short_shelf_all_wood.name=Short Shelf
+tile.long_shelf_all_wood.name=Shelf
+tile.display_shelf_all_wood.name=Display Shelf
+tile.chained_display_shelf.name=Chained Display Shelf
+tile.hanging_display_shelf.name=Hanging Display Shelf
+tile.podium.name=Podium
+tile.podium_trophy.name=Trophy Podium
+tile.glyph_holder_1x1.name=1x1 Neon Glyph Holder
+tile.glyph_holder_inverted_1x1.name=1x1 Neon Glyph Holder (Inverted)
+tile.glyph_holder_2x2.name=2x2 Neon Glyph Holder
+tile.glyph_holder_inverted_2x2.name=2x2 Neon Glyph Holder (Inverted)
+tile.glyph_holder_4x4.name=4x4 Neon Glyph Holder
+tile.glyph_holder_inverted_4x4.name=4x4 Neon Glyph Holder (Inverted)
+tile.signpost.name=Signpost
+tile.crate.name=Crate
+
+tile.display_shelf.tooltip.one=Right-click an empty slot to insert an item
+tile.display_shelf.tooltip.two=Right-click with an empty hand or the same item to extract one
+tile.display_shelf.tooltip.three=Shift-right-click with an empty hand to extract all
+tile.shelf.tooltip=Used to hold up blocks
+
+item.dyed_gas_tube_white.name=White Dyed Gas Tube
+item.dyed_gas_tube_orange.name=Orange Dyed Gas Tube
+item.dyed_gas_tube_magenta.name=Magenta Dyed Gas Tube
+item.dyed_gas_tube_lightBlue.name=Light Blue Dyed Gas Tube
+item.dyed_gas_tube_yellow.name=Yellow Dyed Gas Tube
+item.dyed_gas_tube_lime.name=Lime Dyed Gas Tube
+item.dyed_gas_tube_pink.name=Pink Dyed Gas Tube
+item.dyed_gas_tube_gray.name=Gray Dyed Gas Tube
+item.dyed_gas_tube_silver.name=Silver Dyed Gas Tube
+item.dyed_gas_tube_cyan.name=Cyan Dyed Gas Tube
+item.dyed_gas_tube_purple.name=Purple Dyed Gas Tube
+item.dyed_gas_tube_blue.name=Blue Dyed Gas Tube
+item.dyed_gas_tube_brown.name=Brown Dyed Gas Tube
+item.dyed_gas_tube_green.name=Green Dyed Gas Tube
+item.dyed_gas_tube_red.name=Red Dyed Gas Tube
+item.dyed_gas_tube_black.name=Black Dyed Gas Tube
+item.glyph_template.name=Glyph Template
+item.neon_glyph.name=Neon Glyph
+item.crate_framing.name=Crate Framing
+item.glyph_template.tooltip.blank=Blank
+item.straw_statue.name=Straw Statue
+item.stone_statue.name=Stone Statue
+item.doll_statue.name=Doll
+item.tracklayer_boots.name=Tracklayer Boots
+
+entity.straw_statue.name=Straw Statue
+entity.stone_statue.name=Stone Statue
+entity.doll_statue.name=Doll
+entity.encrusted.name=Encrusted
+
+itemGroup.rubyutils.rubyutils=Ruby Utilities

@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "front": "rubyutils:blocks/neon_glyph_block_front",
+    "side": "rubyutils:blocks/neon_glyph_block_side",
+    "top": "rubyutils:blocks/neon_glyph_block_side",
+    "bottom": "rubyutils:blocks/neon_glyph_block_side"
+  }
+}

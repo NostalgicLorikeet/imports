@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "active=true": { "model": "rubyutils:letter_board_on" },
+    "active=false": { "model": "rubyutils:letter_board" }
+  }
+}

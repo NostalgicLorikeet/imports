@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "rubyutils:crate" },
+    "facing=south": { "model": "rubyutils:crate", "y": 180 },
+    "facing=west":  { "model": "rubyutils:crate", "y": 270 },
+    "facing=east":  { "model": "rubyutils:crate", "y": 90 }
+  }
+}

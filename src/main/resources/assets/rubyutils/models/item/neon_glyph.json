@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "rubyutils:items/neon_glyph",
+    "layer1": "rubyutils:font/ascii_glyph_0"
+  }
+}

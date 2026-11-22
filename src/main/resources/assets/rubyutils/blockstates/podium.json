@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "type=0": { "model": "rubyutils:podium" },
+        "type=1": { "model": "rubyutils:podium_bottom" },
+        "type=2": { "model": "rubyutils:podium_middle" },
+        "type=3": { "model": "rubyutils:podium_top" }
+    }
+}

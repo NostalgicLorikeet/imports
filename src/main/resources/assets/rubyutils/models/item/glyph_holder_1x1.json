@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "rubyutils:items/glyph_holder",
+    "layer1": "rubyutils:font/ascii_glyph_49"
+  }
+}

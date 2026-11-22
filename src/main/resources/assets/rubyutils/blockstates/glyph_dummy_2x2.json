@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "rubyutils:glyph_holder_quads/glyph_holder_2x2" },
+    "facing=south": { "model": "rubyutils:glyph_holder_quads/glyph_holder_2x2", "y": 180 },
+    "facing=west":  { "model": "rubyutils:glyph_holder_quads/glyph_holder_2x2", "y": 270 },
+    "facing=east":  { "model": "rubyutils:glyph_holder_quads/glyph_holder_2x2", "y": 90 }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "active=true,facing=north": { "model": "rubyutils:glyph_holder" },
+    "active=true,facing=south": { "model": "rubyutils:glyph_holder", "y": 180 },
+    "active=true,facing=west":  { "model": "rubyutils:glyph_holder", "y": 270 },
+    "active=true,facing=east":  { "model": "rubyutils:glyph_holder", "y": 90 },
+    "active=false,facing=north": { "model": "rubyutils:glyph_holder" },
+    "active=false,facing=south": { "model": "rubyutils:glyph_holder", "y": 180 },
+    "active=false,facing=west":  { "model": "rubyutils:glyph_holder", "y": 270 },
+    "active=false,facing=east":  { "model": "rubyutils:glyph_holder", "y": 90 }
+  }
+}
